@@ -53,25 +53,25 @@ Mata kuliah ini menggunakan pendekatan **Positivist** (fenomena TI bisa diukur o
 ## Template A.1 — Research Mindset Self-Assessment
 
 ```
-Nama Peneliti    : ____________________
-Tanggal          : ____________________
+Nama Peneliti    : Indah Ruwahna Anugraheni
+Tanggal          : 11 April 2026
 
 1. Ketika membaca klaim "metode X 95% akurat":
-   - Pertanyaan pertama saya: ____________________
-   - Data yang dibutuhkan untuk verifikasi: ____________________
+   - Pertanyaan pertama saya: Apakah data yang digunakan cukup besar dan representatif?
+   - Data yang dibutuhkan untuk verifikasi: Dataset, metode evaluasi, dan hasil pengujian lengkap
 
 2. Posisi paradigma:
-   - Pendekatan: [ ] Positivis  [ ] Interpretivis  [ ] Design Science  [ ] Mixed
-   - Alasan: ____________________
+   - Pendekatan: [☑] Positivis  [☑] Interpretivis  [☑] Design Science  [☑] Mixed
+   - Alasan: Karena menggunakan data kuantitatif dan juga membangun sistem
 
 3. Identifikasi distorsi:
-   - Asumsi tersembunyi: ____________________
-   - Sumber bias potensial: ____________________
-   - Langkah mitigasi: ____________________
+   - Asumsi tersembunyi: Data dianggap mewakili kondisi nyata
+   - Sumber bias potensial: Sampling bias dan overfitting
+   - Langkah mitigasi: Menggunakan dataset beragam dan validasi silang
 
 4. Komitmen etika:
-   - Data yang tidak akan dimanipulasi: ____________________
-   - Batasan yang diakui sejak awal: ____________________
+   - Data yang tidak akan dimanipulasi: Data hasil eksperimen dan data mentah
+   - Batasan yang diakui sejak awal: Dataset terbatas dan kondisi pengujian tidak mencerminkan semua situasi nyata
 ```
 
 ---
@@ -81,23 +81,22 @@ Tanggal          : ____________________
 Pilih satu paper riset di bidang TI yang mengklaim "metode X meningkatkan performa." Telusuri setiap tahap Research Trust Model.
 
 **Paper yang dipilih:**
-> Judul: _______________________________________________
-> Penulis (Tahun): ______________________________________
+> Judul : Analisis Klasifikasi Email Spam Menggunakan Algoritma Naïve Bayes
+> Penulis (Tahun): Azan Rahman, Andi Maslan (2024)
 
 | Tahap | Apa yang Dilakukan | Potensi Distorsi |
 |-------|-------------------|-----------------|
-| Reality → Data | *Contoh: Kumpulkan log server 30 hari* | *Contoh: Hanya ambil jam sibuk* |
-| Data → Processing | | |
-| Processing → Analysis | | |
-| Analysis → Inference | | |
-| Inference → Knowledge | | |
+| Reality → Data | Mengumpulkan dataset email spam dan non-spam | Dataset mungkin tidak mewakili kondisi nyata (hanya dari sumber tertentu) |
+| Data → Processing |Preprocessing data (cleaning, tokenizing, TF-IDF) |Informasi penting bisa hilang saat pembersihan data |
+| Processing → Analysis |Melatih model Naïve Bayes dan balancing data (SMOTE) |Overfitting karena data dibuat lebih seimbang secara buatan |
+| Analysis → Inference |Menghitung akurasi model (hingga ±98%) |Hanya fokus pada akurasi tanpa metrik lain |
+| Inference → Knowledge |Menyimpulkan metode efektif untuk klasifikasi spam |Generalisasi berlebihan ke semua kondisi email |
 
-**Distorsi paling besar di tahap:** ________________________
+**Distorsi paling besar di tahap:** Processing → Analysis
 
 **Dua distorsi spesifik yang teridentifikasi:**
-1. ___________________________________________________
-2. ___________________________________________________
-
+1. Overfitting akibat penggunaan teknik balancing data (SMOTE)
+2. Sampling bias karena dataset tidak sepenuhnya representatif
 ---
 
 ## Latihan 2 — Analisis Kasus Etika
@@ -106,27 +105,30 @@ Skenario: Seorang peneliti menemukan bahwa jika 3 data point outlier dihapus, ha
 
 | Perspektif | Analisis |
 |------------|---------|
-| Kejujuran ilmiah | *Contoh: Laporkan kedua versi (dengan dan tanpa outlier)* |
-| Transparansi | |
-| Peer review | |
+| Kejujuran ilmiah | Peneliti harus melaporkan hasil dengan dan tanpa outlier |
+| Transparansi |Peneliti wajib menjelaskan alasan penghapusan outlier secara jelas |
+| Peer review |Reviewer akan mengevaluasi apakah penghapusan outlier valid secara metodologis |
 
 **Keputusan akhir dan justifikasi:**
-> ___________________________________________________
+> Outlier tidak boleh dihapus hanya untuk membuat hasil signifikan; kedua hasil harus dilaporkan
 
+**justifikasi:**
+> Menghapus data tanpa alasan ilmiah yang kuat termasuk manipulasi data dan melanggar etika penelitian. Outlier hanya boleh dihapus jika terbukti kesalahan data (error input, noise ekstrem, dll).
 ---
 
 ## Latihan 3 — Posisi Paradigma
 
-**Topik riset:** ________________________________________
+**Topik riset:** Analisis klasifikasi email spam menggunakan algoritma Naïve Bayes
 
 | Kriteria | Positivis | Interpretivis | Design Science |
 |----------|-----------|---------------|----------------|
-| Kesesuaian dengan topik (1–5) | *Contoh: 4* | *Contoh: 2* | *Contoh: 5* |
-| Jenis data yang dikumpulkan | | | |
-| Limitasi paradigma | | | |
+| Kesesuaian dengan topik (1–5) | 5| 1 | 4|
+| Jenis data yang dikumpulkan | Data numerik (akurasi, dataset email)| Persepsi pengguna| Data hasil sistem/model|
+| Limitasi paradigma |Tidak melihat aspek subjektif pengguna | Tidak cocok untuk data kuantitatif| Fokus pada artefak, bukan teori|
 
-**Paradigma yang dipilih:** _____________________________
-**Alasan:** ____________________________________________
+**Paradigma yang dipilih:** Positivis
+
+**Alasan:** Karena penelitian menggunakan data kuantitatif, eksperimen terukur, dan bertujuan menguji performa algoritma secara objektif.
 
 ---
 
@@ -135,5 +137,13 @@ Skenario: Seorang peneliti menemukan bahwa jika 3 data point outlier dihapus, ha
 > Sebelum membaca materi ini, apakah pernah mempertanyakan klaim "95% akurat"? Setelah memahami rantai distorsi, pertanyaan apa yang sekarang akan diajukan saat membaca paper?
 
 **Jawaban:**
-> ___________________________________________________
-> ___________________________________________________
+>Sebelum membaca materi ini, saya belum terlalu mempertanyakan klaim seperti “95% akurat” dan cenderung langsung mempercayainya.
+
+>Setelah memahami rantai distorsi dalam Research Trust Model, saya menjadi lebih kritis dan akan mengajukan beberapa pertanyaan saat membaca paper, seperti:
+- Bagaimana data dikumpulkan dan apakah representatif?
+- Apakah ada bias dalam dataset?
+- Apakah metode evaluasi yang digunakan sudah tepat?
+- Apakah hanya menggunakan akurasi atau juga metrik lain seperti precision dan recall?
+Apakah hasil penelitian dapat digeneralisasi ke kondisi nyata?
+
+>Saya juga memahami bahwa setiap tahap dalam penelitian berpotensi mengalami distorsi, sehingga penting untuk mengevaluasi validitas dan etika penelitian sebelum menerima suatu klaim.
