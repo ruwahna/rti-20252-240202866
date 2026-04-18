@@ -67,33 +67,59 @@ Masalah riset yang layak harus memenuhi 5 kriteria:
 PROBLEM STATEMENT BUILDER
 
 Domain & Konteks
-  Domain   : ____________________
-  Konteks  : ____________________
+Domain   : Domain : Human-Computer Interaction (HCI) / UX UI pada platform kesehatan digital
 
+Konteks : Mobile website Halodoc pada proses pencarian dokter dan booking layanan kesehatan
+   
 System Context
-  Input       : ____________________
-  Process     : ____________________
-  Output      : ____________________
-  Outcome     : ____________________
-  Constraints : ____________________
-  Stakeholders: ____________________
+- Input       :
+Query   pencarian pengguna (nama dokter/spesialis), lokasi pengguna, serta interaksi pengguna (klik, scroll)
+
+- Process     : 
+Sistem menampilkan daftar dokter, filtering, navigasi halaman, serta proses pemilihan jadwal dan booking
+
+- Output      : 
+Informasi dokter, jadwal tersedia, dan konfirmasi booking
+
+- Outcome     : 
+Pengguna berhasil atau gagal menyelesaikan proses booking
+
+- Constraints : 
+Ukuran layar mobile terbatas, koneksi internet, serta beban kognitif
+
+- Stakeholders: Pengguna (pasien), dokter, UX designer, developer, dan platform Halodoc 
+
 
 Fenomena → Problem
-  Fenomena yang diamati             : ____________________
-  Gejala (symptom) yang terukur     : ____________________
-  Masalah yang didiagnosis          : ____________________
-  Masalah riset (researchable)      : ____________________
-  Variabel yang terukur             : ____________________
+- Fenomena yang diamati             : 
+Pengguna mengalami kesulitan dalam mencari dokter dan menyelesaikan proses booking pada mobile website Halodoc
+Gejala (symptom) yang terukur : Waktu pencarian lama (>20 detik), task success rate rendah (<60%), dan tingginya navigasi ulang (back navigation)
+
+- Gejala (symptom) yang terukur     : 
+Information overload pada tampilan, navigasi tidak intuitif, serta kurangnya feedback visual pada proses booking
+
+- Masalah yang didiagnosis          : 
+Information overload pada tampilan, navigasi tidak intuitif, serta kurangnya feedback visual pada proses booking
+
+- Masalah riset (researchable)      : 
+Belum ada studi kuantitatif yang mengevaluasi pengaruh kompleksitas informasi dan kejelasan navigasi terhadap efisiensi dan keberhasilan task pengguna pada mobile website Halodoc
+
+- Variabel yang terukur             : 
+Task completion time (detik), task success rate (%), jumlah klik, error rate (%), dan skor System Usability Scale (SUS)
+
 
 Problem Quality Check
-  [ ] Clarity — Apakah satu orang membaca akan paham?
-  [ ] Measurability — Apakah ada metrik kuantitatif?
-  [ ] Relevance — Apakah penting untuk domain?
-  [ ] Testability — Apakah bisa gagal?
-  [ ] Impact — Apakah ada kontribusi jika terjawab?
+  [x] Clarity — Apakah satu orang membaca akan paham?
+  [x] Measurability — Apakah ada metrik kuantitatif?
+  [x] Relevance — Apakah penting untuk domain?
+  [x] Testability — Apakah bisa gagal?
+  [x] Impact — Apakah ada kontribusi jika terjawab?
+
 
 Problem Statement (1 paragraf):
-  ____________________
+
+Penggunaan mobile website Halodoc dalam layanan kesehatan digital masih menghadapi kendala dalam pengalaman pengguna, khususnya pada proses pencarian dokter dan booking layanan. Hal ini ditunjukkan oleh lamanya waktu penyelesaian tugas, rendahnya tingkat keberhasilan pengguna, serta tingginya navigasi ulang selama interaksi. Permasalahan ini diduga disebabkan oleh tingginya information overload pada tampilan antarmuka, struktur navigasi yang kurang intuitif, serta minimnya feedback visual dalam proses booking. Namun, belum terdapat studi kuantitatif yang secara spesifik mengukur pengaruh kompleksitas informasi dan kejelasan navigasi terhadap efisiensi serta keberhasilan task pengguna pada platform tersebut. Oleh karena itu, penelitian ini bertujuan untuk menganalisis hubungan antara kompleksitas UI dan desain navigasi terhadap performa pengguna, menggunakan metrik seperti task completion time, task success rate, error rate, dan System Usability Scale (SUS). 
+
 ```
 
 ---
@@ -102,19 +128,18 @@ Problem Statement (1 paragraf):
 
 Pilih satu topik di bidang TI yang diminati. Transformasikan melalui 5 tahap Problem Formation Model.
 
-**Topik awal:** ________________________________________
+**Topik awal:** UX/UI mobile website kesehatan (Halodoc) pada proses pencarian dokter dan booking
 
 | Tahap | Hasil |
 |-------|-------|
-| Reality | *Contoh: Aplikasi e-commerce sering ditinggalkan saat checkout* |
-| Observed Issue (Symptom) | *Contoh: Bounce rate checkout 68%* |
-| Diagnosed Problem (Root Cause) | |
-| Researchable Problem | |
-| Measurable Variable | |
+| Reality | Pengguna mobile sering kesulitan mencari dokter dan menyelesaikan booking di website Halodoc |
+| Observed Issue (Symptom) | - Waktu pencarian dokter > 20 detik <br> - Task success rate < 60% <br> - Banyak user kembali ke halaman sebelumnya (back navigation tinggi) | Diagnosed Problem (Root Cause) | Information overload pada tampilan mobile, struktur navigasi tidak hierarkis, serta kurangnya feedback visual pada proses booking (tidak ada progress indicator yang jelas)|
+| Researchable Problem |Belum ada studi kuantitatif yang mengevaluasi pengaruh information overload dan kejelasan navigasi terhadap efisiensi task dan keberhasilan booking pada mobile website Halodoc | 
+| Measurable Variable | - Task completion time (detik) <br> - Task success rate (%) <br> - Number of clicks <br> - Error rate (%) <br> - SUS score (System Usability Scale) |
 
-**Apakah terjebak solution-first thinking?** [ ] Ya / [ ] Tidak
-> Jika ya, kembali ke tahap mana? ________________________
 
+**Apakah terjebak solution-first thinking?** [ ] Ya / [☑] Tidak
+> Jika ya, kembali ke tahap mana?
 ---
 
 ## Latihan 2 — System Context Decomposition
@@ -123,14 +148,16 @@ Gambarkan konteks sistem dari masalah riset di Latihan 1.
 
 | Komponen | Deskripsi |
 |----------|----------|
-| Input | *Contoh: Request HTTP dari browser pengguna* |
-| Process | |
-| Output | |
-| Outcome | |
-| Constraints | |
-| Stakeholders | |
+| Input | Query pencarian (nama dokter/spesialis), lokasi user, data interaksi (klik, scroll) |
+| Process | Rendering UI mobile, filtering dokter, navigasi antar halaman, proses booking|
+| Output | Informasi dokter, jadwal tersedia, konfirmasi booking|
+| Outcome | Efisiensi pengguna (cepat/lambat) dan keberhasilan booking|
+| Constraints |Ukuran layar kecil (mobile), bandwidth terbatas, cognitive load pengguna|
+| Stakeholders | Pasien, dokter, UX designer, developer, platform Halodoc|
 
-**Komponen mana yang paling relevan dengan masalah riset?** _______________
+**Komponen mana yang paling relevan dengan masalah riset?** 
+
+>Process (UI complexity & navigation flow di mobile)
 
 ---
 
@@ -140,17 +167,17 @@ Evaluasi problem statement yang sudah dibuat menggunakan 5 kriteria.
 
 | Kriteria | Skor (1-5) | Justifikasi |
 |----------|-----------|-------------|
-| Clarity | *Contoh: 4 — cukup jelas tapi perlu spesifikasi dataset* | |
-| Measurability | | |
-| Relevance | | |
-| Testability | | |
-| Impact | | |
+| Clarity | 5 | Sangat spesifik: mobile, task, dan variabel jelas|
+| Measurability | 5|Semua variabel kuantitatif dan standar UX |
+| Relevance |5 |Sangat penting di health-tech |
+| Testability | 5| Bisa diuji dengan usability testing & eksperimen|
+| Impact | 5|Berdampak pada akses layanan kesehatan digital |
 
-**Skor total:** _____ / 25
+**Skor total:** 25 / 25
 
 **Problem statement versi final (1 paragraf):**
-> ___________________________________________________
-> ___________________________________________________
+
+>Pada era layanan kesehatan digital, efisiensi interaksi pengguna pada platform mobile menjadi faktor krusial dalam keberhasilan akses layanan. Namun, pada mobile website Halodoc, pengguna masih mengalami kesulitan dalam menemukan dokter dan menyelesaikan proses booking. Hal ini ditunjukkan oleh tingginya waktu penyelesaian tugas, rendahnya tingkat keberhasilan booking, serta meningkatnya navigasi ulang oleh pengguna. Permasalahan ini diduga disebabkan oleh tingginya information overload pada tampilan mobile serta struktur navigasi yang kurang intuitif dan minimnya feedback visual selama proses interaksi. Meskipun demikian, belum terdapat studi kuantitatif yang secara spesifik mengukur pengaruh kompleksitas informasi dan desain navigasi terhadap performa pengguna pada konteks mobile health platform. Oleh karena itu, penelitian ini bertujuan untuk menganalisis hubungan antara kompleksitas UI dan kejelasan navigasi terhadap efisiensi dan keberhasilan task pengguna, dengan menggunakan metrik seperti task completion time, task success rate, error rate, serta System Usability Scale (SUS), melalui pendekatan usability testing dan evaluasi heuristik.
 
 ---
 
@@ -159,5 +186,6 @@ Evaluasi problem statement yang sudah dibuat menggunakan 5 kriteria.
 > Bandingkan "masalah" yang biasa ditemui saat coding (bug, error) dengan masalah riset. Apa perbedaan fundamental dalam cara mendefinisikan dan mendekati keduanya?
 
 **Jawaban:**
-> ___________________________________________________
-> ___________________________________________________
+> Masalah pada coding seperti bug atau error biasanya bersifat teknis, jelas terlihat, dan memiliki solusi yang relatif langsung, yaitu memperbaiki kode agar sistem dapat berjalan sesuai fungsi yang diharapkan. Pendekatannya cenderung fokus pada “memperbaiki” (problem-solving) dengan cara mencoba, debugging, dan implementasi solusi yang sudah diketahui.
+
+> Sebaliknya, masalah riset tidak selalu terlihat secara langsung dan memerlukan proses identifikasi yang sistematis, mulai dari fenomena, gejala, hingga akar masalah. Masalah riset juga harus dirumuskan secara spesifik, terukur, dan dapat diuji secara ilmiah. Pendekatannya bukan hanya menyelesaikan masalah, tetapi memahami penyebabnya, menguji hipotesis, dan menghasilkan pengetahuan baru yang dapat dibuktikan serta direplikasi.
