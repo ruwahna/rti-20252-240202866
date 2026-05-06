@@ -64,46 +64,80 @@ Jika variabel tidak bisa di-map ke komponen apapun → arsitektur perlu didesain
 
 ## Template A.6 — Mapping RQ ke Arsitektur Sistem
 
-```
-SYSTEM-EXPERIMENT MAPPING
-
-Research Question: ____________________
-
-Variable → Component Mapping:
-| Variabel | Tipe | Komponen Sistem | Cara Manipulasi/Pengukuran |
-|----------|------|-----------------|---------------------------|
-|          | IV   |                 |                           |
-|          | DV   |                 |                           |
-|          | CV   |                 |                           |
-
-4 Prinsip Desain:
-  [ ] Traceability — Setiap komponen bisa ditelusuri ke variabel
-  [ ] Variable Isolation — IV bisa diubah tanpa mengubah CV
-  [ ] Measurement Integration — Pengukuran DV built-in
-  [ ] Reproducibility — Setup bisa direkonstruksi
-
-Experimental Setup:
-  Input data     : ____________________
-  Parameter      : ____________________
-  Output format  : ____________________
-```
+### Research Question
+**Apakah metode Dynamic Serendipity Adjustment (DSA) menghasilkan skor Unexpectedness yang lebih tinggi tanpa menurunkan F1-Score lebih dari 2% dibandingkan dengan metode Hybrid Recommendation pada dataset e-commerce?**
 
 ---
+
+### Variable → Component Mapping
+
+| Variabel | Tipe | Komponen Sistem | Cara Manipulasi / Pengukuran |
+|----------|------|-----------------|------------------------------|
+| **Strategi Pembobotan Serendipity** | IV | **Recommendation Engine Module** — Dual-algorithm: (1) Hybrid Recommendation (static weighting), (2) DSA (real-time adaptation) | Config `recommender_type: ["hybrid" \| "dsa"]`. Swap di runtime via parameter. Weight init dari config file. |
+| **Unexpectedness Score** | DV | **Metrics Collector Module** — Function calculate_unexpectedness() | Query transaction log per session → cross-check user history 90 hari → count unexpected → divide by total. Output: 0.0–1.0. |
+| **F1-Score (Weighted)** | DV | **Metrics Collector Module** — Function calculate_f1_weighted() | Ground truth: rating ≥3.5 = positive. Compute TP/FP/FN per kategori → F1 per kategori → weighted average. |
+| **Kategori Produk** | CV | **Configuration (product_categories.yaml)** | Fixed list: Fashion, Elektronik, Rumah Tangga, dll. Load saat startup. |
+| **Perilaku User (Phase)** | CV | **Phase Detector Module** | Classify dari behavior log: Buying Phase (pending checkout <15 min) vs Browsing Phase (exploratory >5 min). |
+
+---
+
+### 4 Prinsip Desain
+
+✅ **Traceability** — Setiap komponen bisa ditelusuri ke variabel
+- Recommendation Engine ↔ IV
+- Metrics Collector ↔ DV
+- Config Module ↔ CV
+
+✅ **Variable Isolation** — IV bisa diubah tanpa mengubah CV
+- Swap `recommender_type` di config
+- Data, kategori, phase detection tetap sama
+
+✅ **Measurement Integration** — Pengukuran DV built-in
+- Metrics Collector otomatis compute unexpectedness & F1 per session
+- Output format JSON terstruktur
+
+✅ **Reproducibility** — Setup bisa direkonstruksi
+- Config YAML terdokumentasi
+- Version control code + config
+- Dataset snapshot & metadata
+
+---
+
+### Experimental Setup
+
+**Input Data:**
+- Dataset e-commerce: user-product interaction log (6 bulan)
+- Size: ≥10K users, ≥100K transactions
+- Format: CSV (user_id, product_id, timestamp, interaction_type, rating, category)
+
+**Parameter:**
+- recommender_type: Hybrid | DSA
+- serendipity_weight_hybrid: fixed (e.g., 0.3)
+- serendipity_threshold_dsa: dynamic per phase (buying: 0.1, browsing: 0.5)
+- novelty_lookback_days: 90 (fixed)
+- product_categories: [Fashion, Elektronik, ...] (fixed)
+- phase_threshold_minutes: 15 buying, 5 browsing (fixed)
+
+**Output Format:**
+- Per-session JSON: {session_id, recommender_type, unexpectedness_score, f1_weighted, category, user_phase}
+- Aggregated CSV: satu baris per session
 
 ## Latihan 1 — Variable-to-Component Mapping
 
 Gunakan RQ dan variabel dari WS-05. Petakan ke komponen sistem.
 
-**RQ:** __________________________________________________
+**RQ:** Apakah metode Dynamic Serendipity Adjustment (DSA) menghasilkan skor Unexpectedness yang lebih tinggi tanpa menurunkan F1-Score lebih dari 2% dibandingkan dengan metode Hybrid Recommendation pada dataset e-commerce?
 
 | Variabel | Tipe | Komponen Sistem | Cara Manipulasi / Pengukuran |
 |----------|------|-----------------|---------------------------|
-| *Contoh: Jenis model* | *IV* | *Modul classifier (swap RF ↔ CNN)* | *Ganti config `model_type`* |
-| | DV | | |
-| | CV | | |
+| Strategi Pembobotan Serendipity | IV | Recommendation Engine Module (dual-algorithm: Hybrid vs DSA) | Config recommender_type swap antara hybrid dan dsa; init weight param dari config file. |
+| Unexpectedness Score | DV | Metrics Collector Module — calculate_unexpectedness() | Query transaction log per session, cross-check user history 90 hari, hitung proporsi produk baru, output nilai 0.0-1.0. |
+| F1-Score (Weighted) | DV | Metrics Collector Module — calculate_f1_weighted() | Ground truth: rating >= 3.5 = positive. Compute TP/FP/FN per kategori, precision/recall per kategori, F1-weighted average. |
+| Kategori Produk | CV | Configuration (product_categories.yaml) | Fixed list: Fashion, Elektronik, Rumah Tangga, dll. Load saat startup, gunakan untuk stratifikasi. |
+| Perilaku User (Phase) | CV | Phase Detector Module | Classify dari behavior log: Buying Phase (pending checkout <15 min) vs Browsing Phase (exploratory >5 min no checkout). |
 
-**Apakah semua variabel bisa di-map?** [ ] Ya / [ ] Tidak
-> Jika tidak, komponen apa yang perlu ditambahkan? _________
+**Apakah semua variabel bisa di-map?** [x] Ya / [ ] Tidak
+> Semua 5 variabel (2 IV, 2 DV, 2 CV) sudah ter-map ke komponen spesifik. Tidak ada lompatan logis; setiap variabel punya role jelas di sistem.
 
 ---
 
@@ -113,31 +147,40 @@ Evaluasi desain sistem terhadap 4 prinsip.
 
 | Prinsip | Status | Bukti / Penjelasan |
 |---------|--------|-------------------|
-| Traceability | *Contoh: ✅ — setiap modul punya label variabel* | |
-| Modularity | | |
-| Controllability | | |
-| Measurability | | |
+| **Traceability** | OK | Recommendation Engine module langsung map ke IV (strategi pembobotan). Metrics Collector map ke DV (unexpectedness, F1). Config & Phase Detector map ke CV. RQ -> Variables -> Components membentuk rantai jelas. |
+| **Modularity** | OK | Recommendation Engine, Metrics Collector, Phase Detector, Config adalah modul terpisah. IV (algoritma) bisa di-swap via config tanpa modifikasi code lain. Metrics Collector bisa dijalankan independent. |
+| **Controllability** | OK | Semua CV (kategori, phase threshold, lookback_days) dieksternalisasi ke YAML config files. Tidak hardcoded. Tim dapat mereproduksi eksperimen dengan swap config file saja. |
+| **Measurability** | OK | DV (Unexpectedness, F1) dihitung otomatis oleh Metrics Collector per session. Output format JSON terstruktur. Tidak ada manual calculation atau ambiguitas. |
 
-**Prinsip mana yang paling sulit dipenuhi?** _______________
+**Prinsip mana yang paling sulit dipenuhi?** Controllability (menutup hardcoding parameter)
+
 **Strategi untuk mengatasinya:**
-> ___________________________________________________
+> (1) Identifikasi semua parameter yang CV: product_categories, phase_threshold_min, novelty_lookback_days, weight_serendipity_hybrid, weight_serendipity_dsa. (2) Buat YAML config template dengan section terpisah untuk setiap parameter. (3) Modifikasi startup code untuk load semua param dari YAML, bukan hardcode. (4) Tambah validation function: jika param di-code dan config berbeda, raise error & log warning. (5) Document per config item: apa artinya, range valid, alasan tetap? (fixed untuk fairness, controlled untuk sensitivity analysis). (6) Version control config files bersama code → reproducibility terjamin.
 
 ---
 
 ## Latihan 3 — Ablation Study Planning
 
-Jika sistem memiliki 3 komponen utama, rencanakan ablation study.
+Jika sistem memiliki 3 komponen utama pada DSA, rencanakan ablation study.
 
-| Kondisi | Komponen A | Komponen B | Komponen C | Hasil yang Diharapkan |
+| Kondisi | Real-time Behavior Detection | Dynamic Weight Adjustment | Phase-Aware Adaptation | Hasil yang Diharapkan |
 |---------|-----------|-----------|-----------|----------------------|
-| Full | *Contoh: ✅ CNN* | *Contoh: ✅ Temporal features* | *Contoh: ✅ Z-score norm* | *Baseline penuh* |
-| – A | ❌ (ganti RF) | ✅ | ✅ | |
-| – B | ✅ | ❌ (tanpa temporal) | ✅ | |
-| – C | ✅ | ✅ | ❌ (tanpa normalisasi) | |
+| Full DSA | Aktif (Click log + time) | Aktif (Adjust serendipity weight) | Aktif (Buying vs Browsing) | Unexpectedness maksimal, F1 <= baseline - 2% |
+| - A | Nonaktif (Fixed user profile) | Aktif | Aktif | Unexpectedness menurun ~15% |
+| - B | Aktif | Nonaktif (Static weight 0.3) | Aktif | Unexpectedness menurun ~20% |
+| - C | Aktif | Aktif | Nonaktif (Uniform weight) | Unexpectedness naik tapi F1 turun >5% |
 
-**Komponen mana yang diprediksi paling berkontribusi?** _____
+**Komponen mana yang diprediksi paling berkontribusi?** Komponen B (Dynamic Weight Adjustment)
+
 **Mengapa?**
-> ___________________________________________________
+> Komponen B adalah "inti" DSA — real-time adjustment sesuai behavior signal. Tanpa ini, sistem hanya reactive (tahu user lagi browsing) tapi tidak bisa adaptively ubah output. Komponen A (detection) & C (phase-aware) penting tapi lebih sebagai input/context; tanpa B, konteks itu tidak dimanfaatkan untuk keputusan rekomendasi. Prediksi: menghilangkan B akan menurunkan Unexpectedness 20-25%, sementara menghilangkan A hanya 10-15%, dan C hanya 5-8%.
+>
+> Expected Unexpectedness Contribution:
+> - Full DSA: 0.45 (target)
+> - Without A: 0.30 (↓33%)
+> - Without B: 0.25 (↓44%)
+> - Without C: 0.40 (↓11%)
+> Ranking: B (44%) > A (33%) > C (11%)
 
 ---
 
@@ -146,5 +189,35 @@ Jika sistem memiliki 3 komponen utama, rencanakan ablation study.
 > Apa risiko jika sistem dibangun seperti produk (monolitik, fitur lengkap) lalu baru dilakukan eksperimen? Mengapa arsitektur modular penting untuk riset?
 
 **Jawaban:**
-> ___________________________________________________
-> ___________________________________________________
+
+**Risiko Sistem Monolitik:**
+
+1. **Confounding Variables** — Fitur lengkap berarti banyak komponen saling-interaksi. Ketika eksperimen mengubah satu variabel, banyak hal lain ikut berubah. Tidak bisa isolate IV dari noise.
+   - Contoh: Jika Hybrid Recommendation sudah hardcoded dengan ranking, filtering, caching kompleks, lalu DSA diganti algoritma inti, perubahan F1 bisa karena DSA algorithm OR karena cache behavior berubah. Tidak bisa dibedakan.
+
+2. **Variable Isolation Impossible** — Untuk ablation study atau sensitivity analysis, harus bisa toggle komponen satu per satu. Pada sistem monolitik, setiap toggle requires code change di banyak tempat, risiko bug tinggi.
+   - Contoh: Mau test apakah phase-aware adaptation diperlukan? Pada sistem monolitik, harus find-replace phase detection di 5+ file, test, kemudian revert. Rawan error.
+
+3. **Reproducibility Problem** — Sistem product-focused sering optimize untuk performa/UX, bukan untuk eksperimen. Hardcoded parameter, implicit dependencies, magic numbers tersebar. Sulit direkonstruksi.
+   - Contoh: Serendipity weight_hybrid mungkin di-tune manual oleh engineer ke 0.35 untuk "looks good", tidak terdokumentasi. Ketika kolaborator ingin replikasi, tidak tahu dari mana nilai itu.
+
+4. **Measurement Overhead** — Metrik pengukuran mungkin tidak built-in. Harus extract log, post-process, hitung manual. Rentan human error, tidak reproducible.
+   - Contoh: F1-Score calculation mungkin harus query 3 database berbeda, join manual, then hitung. Jika ada typo di SQL, F1 salah.
+
+5. **Time & Cost** — Refactor monolitik ke modular memakan waktu + risiko breaking production. Telat eksperimen, telat publikasi.
+
+---
+
+**Mengapa Arsitektur Modular Penting untuk Riset:**
+
+1. **Variable Isolation by Design** — Setiap IV punya komponen dedikasi. Swap komponen = ubah IV saja. CV & DV unaffected.
+
+2. **Ablation Study Straightforward** — Toggle fitur via config flag bukan code change. Menjalankan Full, –A, –B, –C hanya perlu ubah config YAML, bukan rebuild.
+
+3. **Measurement Built-in** — DV (metrics) computed otomatis setiap session. Tidak perlu manual processing post-eksperimen.
+
+4. **Reproducibility Maksimal** — Config files ter-version-control, code stable, no hardcoding. Kolaborator bisa replikasi dengan: (1) git clone, (2) swap config, (3) run.
+
+5. **Agile Experimentation** — Kalau hypothesis di-revise, hanya update config, tidak rebuild. Cepat iterate, fast learning.
+
+**Kesimpulan:** Arsitektur modular adalah investasi di depan yang menghemat waktu + meningkatkan confidence dalam hasil riset. Sistem riset ≠ sistem produksi — harus optimize untuk evidence, bukan untuk user experience.
