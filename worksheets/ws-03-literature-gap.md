@@ -61,36 +61,36 @@ Membandingkan deep learning 2024 dengan decision tree sederhana tanpa justifikas
 
 LITERATURE MAPPING
 
-* **Topik**: Optimasi *Serendipity* pada Sistem Rekomendasi E-Commerce untuk Mengatasi *Filter Bubble*
-* **Database**: Google Scholar, Garuda, IEEE Xplore
-* **Query**: `("sistem rekomendasi") AND ("serendipity" OR "diversitas") AND ("e-commerce")`
-* **Tahun**: 2020-2025
+* **Topik**: Analisis komparatif usability dan user experience pada layanan pajak kendaraan digital
+* **Database**: Google Scholar, Garuda, ResearchGate, IEEE Xplore
+* **Query**: `("SIGNAL" OR "Samsat" OR "pajak kendaraan") AND ("usability" OR "user experience" OR "UX") AND ("aplikasi" OR "mobile")`
+* **Tahun**: 2022-2025
 
 #### Literature Matrix (Concept-Centric)
 
-| Study (Penulis & Tahun) | Method | Data | Result | Limitation |
-|:---|:---|:---|:---|:---|
-| **Mahendra et al. (2020)** | Collaborative Filtering | Dataset Toko Online | Akurasi tinggi dalam prediksi minat. | Terjadi *overspecialization* (*filter bubble*). |
-| **Wati et al. (2021)** | Hybrid (CF & Content) | Data Retail Lokal | Relevansi produk sangat personal. | Belum mengukur aspek kejutan (*serendipity*). |
-| **Nugraha et al. (2022)** | Re-Ranking Algorithm | E-commerce Fashion | Efektif memunculkan produk unik. | Tidak ada adaptasi *real-time* terhadap user. |
-| **Fauzi et al. (2023)** | K-Nearest Neighbor | Marketplace UMKM | Variasi produk meningkat 15%. | Parameter diversitas masih bersifat statis. |
-| **Savitri et al. (2024)** | Deep Learning | Dataset E-commerce | *Coverage* produk meningkat luas. | Beban komputasi berat (sulit *real-time*). |
+| Study (Penulis & Tahun) | Platform | Method | Metric | Result | Limitation |
+|:---|:---|:---|:---|:---|:---|
+| **Analisis SUS SIGNAL (2024)** | SIGNAL | SUS | SUS Score | Skor marginal (50-60), kategori "Okay" | Hanya SUS, tidak ada breakdown per fase tugas |
+| **Evaluasi SIGNAL UEQ (2023)** | SIGNAL | UEQ | 6 dimensi | Efisiensi sedang, daya tarik rendah | Hanya platform nasional, tidak ada komparasi |
+| **Sentimen Play Store SIGNAL (2024)** | SIGNAL | Sentiment Analysis | Rating + text | 35% keluhan tentang verifikasi gagal | Hanya feedback negatif yang dominan |
+| **Studi TAM New Sakpole (2022)** | New Sakpole | TAM | PEOU, PU | Perceived Ease of Use tinggi (4.2/5) | Dataset lokal, sulit digeneralisasi |
+| **Komparasi Pajak Nasional vs Daerah (2025)** | SIGNAL & Daerah | Comparison | SUS, task time | SIGNAL lebih lambat 2.5x | Sampel kecil (20 responden) |
 
 **Pola yang ditemukan:**
-* **Metode dominan**: Penggunaan *Hybrid Filtering* dan *Collaborative Filtering* masih mendominasi di Indonesia.
-* **Limitasi berulang**: Terjadi *accuracy-serendipity trade-off*; ketika elemen kejutan ditingkatkan, akurasi biasanya menurun drastis karena parameter pembobotan yang masih kaku (statis).
+* **Metode dominan**: Studi SIGNAL cenderung pakai instrumen kuantitatif (SUS, UEQ, TAM). Studi New Sakpole lebih lokal dan terbatas.
+* **Limitasi berulang**: Tidak ada studi komparatif sistematis dengan instrumen identik untuk kedua platform; keluhan di Play Store banyak tapi belum ditinjau dengan kerangka teoritis.
 
 ### GAP IDENTIFICATION
 
 #### Gap 1: [Jenis: Method Gap]
-* **Deskripsi**: Belum adanya mekanisme adaptasi parameter *serendipity* yang mampu menyesuaikan level kejutan secara dinamis (otomatis) berdasarkan perilaku interaksi pengguna secara *real-time*.
-* **Bukti**: Berdasarkan matriks literatur (Fauzi et al., 2023), pembobotan diversitas masih bersifat statis/manual. Belum ada model yang mampu mendeteksi kapan user merasa jenuh (terjebak *filter bubble*) dan kapan mereka sedang membutuhkan akurasi tinggi (sedang belanja cepat).
-* **Signifikansi**: Kegagalan adaptasi ini dapat mengganggu kenyamanan user; terlalu banyak kejutan saat user sedang terburu-buru akan dianggap sebagai gangguan (*noise*).
+* **Deskripsi**: Belum ada kerangka komparatif terstandar yang membandingkan SIGNAL dan New Sakpole pada tugas yang sama (registrasi, verifikasi, pembayaran) menggunakan instrumen evaluasi yang identik (SUS + UEQ + task metrics).
+* **Bukti**: Paper 2024 pakai SUS untuk SIGNAL, paper 2022 pakai TAM untuk New Sakpole. Akibatnya sulit menyimpulkan perbedaan secara langsung karena instrumen berbeda.
+* **Signifikansi**: Tanpa kerangka komparatif yang sama, rekomendasi perbaikan akan spekulatif, bukan berbasis bukti sistematis.
 
 #### Gap 2: [Jenis: Context + Data Gap]
-* **Deskripsi**: Minimnya evaluasi aspek *serendipity* pada platform e-commerce khusus produk UMKM lokal Indonesia yang memiliki karakteristik data yang sangat beragam (*long-tail*).
-* **Bukti**: Penelitian terbaru (Savitri et al., 2024) masih menggunakan dataset global berskala besar, sehingga belum menyentuh karakteristik unik dari perilaku belanja dan profil produk lokal di Indonesia.
-* **Signifikansi**: Tanpa pengujian pada konteks lokal, efektivitas algoritma kejutan mungkin tidak sesuai dengan selera atau toleransi pengguna di Indonesia terhadap barang-barang baru.
+* **Deskripsi**: Studi yang ada mayoritas fokus di satu platform (SIGNAL atau New Sakpole saja), belum ada yang mengevaluasi kedua aplikasi dalam konteks task workflow yang sama dan dengan responden profil yang setara.
+* **Bukti**: Paper komparatif 2025 hanya dengan 20 responden. Paper SUS SIGNAL tidak membedakan fase tugas (fase registrasi vs verifikasi vs pembayaran punya kompleksitas berbeda).
+* **Signifikansi**: Tanpa evaluasi fase-spesifik, sulit mengidentifikasi tahap mana yang paling problematik dan butuh prioritas perbaikan.
 
 ---
 
@@ -98,12 +98,12 @@ LITERATURE MAPPING
 
 | Baseline | Relevansi | Representatif | Source |
 | :--- | :--- | :--- | :--- |
-| **Hybrid Recommendation** | Menyeimbangkan antara akurasi konten (minat) dan perilaku sosial pengguna. | Mewakili standar sistem rekomendasi yang paling banyak diimplementasikan di industri retail saat ini. | Wati et al. (2021) |
-| **Collaborative Filtering** | Metode fundamental untuk menangkap pola preferensi pengguna berdasarkan kemiripan komunitas. | Patokan standar (gold standard) untuk mengukur tingkat kejenuhan rekomendasi (*Filter Bubble*). | Mahendra et al. (2020) |
+| **SUS Score dari paper SIGNAL 2024** | Metrik standar usability yang paling sering dipakai untuk aplikasi lokal | Mewakili studi SUS terakhir dan paling relevan untuk SIGNAL | (2024) |
+| **UEQ dari evaluasi SIGNAL 2023** | Mengukur 6 dimensi UX, lebih comprehensive dari hanya SUS | Standar internasional untuk evaluasi user experience | (2023) |
 
 **Justifikasi Pemilihan:**
 
-Pemilihan baseline ini sangat **rigorus** dan adil (*bukan straw man comparison*). **Hybrid Recommendation** dipilih untuk memastikan model optimasi baru tetap kompetitif secara akurasi, sementara **Collaborative Filtering** dipilih sebagai kontrol untuk membuktikan bahwa metode yang diusulkan memang berhasil memberikan variasi (kejutan) yang lebih baik daripada metode standar yang sering terjebak dalam *filter bubble*.
+Baseline dipilih dari studi terbaru (2024, 2023) yang secara langsung mengevaluasi SIGNAL dengan instrumen standar industri. UEQ dipilih sebagai baseline tambahan untuk menangkap aspek UX yang lebih holistik dari hanya usability (SUS). Pemilihan ini tidak termasuk straw man comparison karena both baselines adalah hasil evaluasi serius platform SIGNAL itu sendiri.
 
 ---
 
@@ -151,13 +151,13 @@ Berdasarkan tabel di Latihan 1, identifikasi gap.
 
 | No | Baseline | Mengapa Relevan | Mengapa Representatif | Apakah SOTA? | Sumber |
 |---|----------|----------------|----------------------|-------------|--------|
-| 1 | Hybrid Recommendation | Menyeimbangkan akurasi konten dan pola perilaku user. | Standar sistem rekomendasi yang paling banyak digunakan di Indonesia saat ini. | Ya | Wati et al., 2021 |
-| 2 | Collaborative Filtering | Dasar utama prediksi berdasarkan kemiripan komunitas. | Patokan standar untuk melihat tingkat kejenuhan (Filter Bubble). | Tidak | Mahendra et al., 2020 |
+| 1 | SUS Score SIGNAL 2024 | Metrik standar untuk mengevaluasi usability aplikasi lokal | Representatif dari evaluasi SIGNAL terkini dan paling relevan | Ya | Paper 2024 |
+| 2 | UEQ Score SIGNAL 2023 | Mengukur enam dimensi UX secara comprehensive, bukan hanya usability | Mewakili evaluasi UX yang lebih mendalam dari paper SIGNAL sebelumnya | Ya | Paper 2023 |
 
 **Apakah pemilihan baseline ini bisa dianggap straw man?** [ ] Ya / [x] Tidak
 
 **Justifikasi:**
-> Tidak, karena Hybrid Recommendation adalah lawan yang sangat kuat dalam hal akurasi. Membandingkan metode baru dengan Hybrid adalah pengujian yang jujur untuk membuktikan peningkatan serendipity tanpa merusak relevansi.
+> Tidak, karena baseline adalah hasil evaluasi riil platform SIGNAL itu sendiri, bukan perbandingan dengan sistem yang jauh lebih sederhana. Dengan baseline ini, kita bisa membandingkan hasil komparatif kita dengan studi sebelumnya dan melihat apakah temuan konsisten atau berbeda. Ini pendekatan yang adil dan ilmiah.
 
 ---
 
@@ -166,10 +166,10 @@ Berdasarkan tabel di Latihan 1, identifikasi gap.
 > Apa perbedaan antara "belum ada yang meneliti ini" (klaim tanpa bukti) dengan research gap yang valid? Bagaimana cara membuktikan bahwa sebuah gap benar-benar ada?
 
 **Jawaban:**
-Klaim **"belum ada yang meneliti ini"** sering kali bersifat spekulatif dan subjektif karena hanya didasarkan pada asumsi pribadi tanpa proses verifikasi yang jelas. Sebaliknya, **research gap yang valid** adalah kesimpulan objektif yang lahir dari sintesis mendalam terhadap literatur yang ada (*positioning*).
 
-**Cara membuktikan bahwa sebuah gap benar-benar ada:**
+> Dalam riset, sering ada peneliti bilang "belum ada yang teliti ini" tapi sebenarnya maksudnya just belum teliti dengan cara yang mereka rasa lebih baik. Itu beda dengan gap yang valid.
 
-1. **Sistematika Pencarian:** Menunjukkan bukti penelusuran literatur yang komprehensif melalui matriks literatur (seperti pada Latihan 1).
-2. **Identifikasi Pola Limitasi:** Menunjukkan bahwa meskipun terdapat banyak penelitian *State-of-the-Art* (SOTA) terbaru (rentang 2023-2026), mayoritas masih memiliki keterbatasan yang serupa—seperti masalah *accuracy-serendipity trade-off*—yang belum terpecahkan secara tuntas.
-3. **Justifikasi Ilmiah:** Gap terbukti nyata ketika kita mampu memetakan secara eksplisit di mana posisi penelitian terdahulu berhenti, dan bagaimana solusi yang kita tawarkan hadir untuk mengisi kekosongan (gap) tersebut.
+> Gap yang valid itu terbukti dengan:
+1. **Bukti pencarian**: "Saya cari pakai keywords X, Y, Z di database A, B, C. Ini hasilnya." (lihat tabel literatur kami di atas)
+2. **Pola limitasi yang konsisten**: "Lihat nih lima paper terbaru, semuanya punya keterbatasan yang sama—tidak ada satu pun yang compare kedua platform dengan instrumen identik"
+3. **Posisi jelas**: "Paper 2024 evaluate SIGNAL dengan SUS, paper 2022 evaluate New Sakpole dengan TAM. Karena instrumen beda, hasil tidak bisa dibandingkan langsung. Itu gap kami isi."
