@@ -65,7 +65,7 @@ Metrik harus ditentukan **sebelum** eksperimen. Memilih metrik setelah melihat d
 
 ### Research Question
 
-**Apakah metode Dynamic Serendipity Adjustment (DSA) menghasilkan skor Unexpectedness yang lebih tinggi tanpa menurunkan F1-Score lebih dari 2% dibandingkan dengan metode Hybrid Recommendation pada dataset e-commerce?**
+**Apakah terdapat perbedaan signifikan pada skor usability (SUS) dan user experience (UEQ) antara SIGNAL dan New Sakpole pada ketiga fase user journey kritis (registrasi, verifikasi identitas, pembayaran) ketika dievaluasi dengan instrumen evaluasi yang identik?**
 
 ---
 
@@ -73,31 +73,44 @@ Metrik harus ditentukan **sebelum** eksperimen. Memilih metrik setelah melihat d
 
 | Variabel | Tipe | Konsep | Metrik | Skala | Satuan |
 |----------|------|--------|--------|-------|--------|
-| Strategi Pembobotan Serendipity | IV | Pendekatan penyesuaian parameter kejutan | Static Weighting (Hybrid) vs Dynamic Weighting (DSA) | Nominal | — |
-| Unexpectedness (Serendipity) | DV | Tingkat kejutan/novelti rekomendasi | Proporsi produk baru dalam rekomendasi | Ratio | 0.0–1.0 |
-| F1-Score (Akurasi) | DV | Keseimbangan presisi & recall relevansi | F1-weighted per kategori produk | Ratio | 0.0–1.0 |
-| Kategori Produk | CV | Jenis/klasifikasi produk katalog | Fashion, Elektronik, Rumah Tangga, dll | Nominal | — |
-| Perilaku User | CV | Konteks interaksi user | Buying Phase vs Browsing Phase | Nominal | — |
+| Platform Aplikasi Pajak | IV | Jenis aplikasi yang diuji | SIGNAL vs New Sakpole | Nominal | — |
+| Fase User Journey | IV | Tahap transaksi dalam alur pembayaran pajak | Registrasi, Verifikasi Identitas, Pembayaran | Nominal | — |
+| Usability Score | DV | Kemudahan penggunaan aplikasi | System Usability Scale (SUS) | Ratio | 0-100 (skor mentah) |
+| User Experience Score | DV | Pengalaman pengguna multi-dimensi | User Experience Questionnaire (UEQ) | Ordinal | 1-7 per item (6 dimensi) |
+| Task Completion Time | DV | Kecepatan penyelesaian tugas | Waktu dari mulai hingga sukses selesai | Ratio | Detik (s) |
+| Task Success Rate | DV | Proporsi pengguna berhasil menyelesaikan | Jumlah responden sukses / Total responden | Ratio | % (0-100) |
+| Error Rate | DV | Frekuensi kesalahan/retry | Jumlah kesalahan per fase per user | Ratio | Jumlah/orang |
+| Demografi Pengguna | CV | Karakteristik responden | Usia, tingkat digital literacy, pengalaman pajak | Nominal/Ordinal | — |
+| Jenis Perangkat | CV | Hardware yang digunakan | Smartphone (Android/iOS), Tablet | Nominal | — |
 
 ---
 
 ### Detail Operasionalisasi
 
-**IV: Strategi Pembobotan Serendipity**
-- **Metode Hybrid**: Parameter serendipity fix (tidak berubah) sepanjang sesi user
-- **Metode DSA**: Parameter dinamis disesuaikan real-time berdasarkan click log & phase detection (buying vs browsing)
-- **Cara Mengukur**: Implementasi kedua algoritma di backend, log setiap parameter adjustment
-- **Justifikasi**: Elemen utama yang membedakan kedua metode; langsung terikat pada hipotesis
+**IV-1: Platform Aplikasi**
+- **SIGNAL**: Aplikasi Samsat Digital Nasional (versi terbaru di Play Store)
+- **New Sakpole**: Aplikasi Bapenda Jawa Tengah New Sakpole (versi terbaru di Play Store)
+- **Cara Mengukur**: Pengguna melakukan task di aplikasi masing-masing sesuai random assignment
+- **Justifikasi**: Variabel utama yang ingin dibandingkan; eksekusi harus konsisten (versi sama untuk semua responden per platform)
 
-**DV: Unexpectedness Score**
-- **Definisi Operasional**: (Jumlah produk baru dalam rekomendasi) / (Total produk direkomendasi)
-  - "Baru" = belum diklik/dibeli user dalam 90 hari terakhir AND novelty rank > median
-- **Cara Mengukur**: Query transaction log → identifikasi produk rekomendasi → cross-check dengan user history 90 hari → hitung proporsi
-- **Validasi Construct**: User survey (10 users × 100 rekomendasi random) → apakah produk benar unexpected? (target: agreement ≥70%, Cronbach's α ≥0.70)
-- **Justifikasi**: Operasionalisasi serendipity dengan threshold temporal jelas; multi-metric validation (tambah Coverage & Novelty)
+**IV-2: Fase User Journey**
+- **Registrasi**: Dari akses aplikasi hingga akun terbentuk
+- **Verifikasi Identitas**: Dari input NIK/STNK hingga sistem memverifikasi data identitas
+- **Pembayaran**: Dari pemilihan metode pembayaran hingga konfirmasi pembayaran berhasil
+- **Cara Mengukur**: Protokol task yang sama untuk kedua platform; video recording + think-aloud protocol untuk capture friction points
+- **Justifikasi**: Tiga fase dipilih berdasarkan studi gap; keluhan Play Store SIGNAL fokus di verifikasi; setiap fase punya kompleksitas berbeda
 
-**DV: F1-Score (Weighted)**
-- **Definisi Operasional**: $F_1 = \frac{2 \times (Precision \times Recall)}{Precision + Recall}$ per kategori, kemudian weighted average
+**DV-1: SUS Score**
+- **Definisi Operasional**: 10 item Likert 1-5 → skor raw (jumlah respons) → formula SUS = (raw_score - 10) × 2.5, range 0-100
+- **Cara Mengukur**: Post-task questionnaire setelah setiap fase; responden rate persetujuan dengan 10 statements tentang usability
+- **Validasi Construct**: SUS adalah instrumen standar internasional (Brooke, 1996) dengan Cronbach's α ≥0.90 di banyak studi; tidak perlu re-validasi
+- **Justifikasi**: SUS dipilih karena (1) standar industri, (2) sudah dipakai SIGNAL 2024, memungkinkan baseline comparison, (3) mudah diadministrasikan
+
+**DV-2: UEQ Score (User Experience Questionnaire)**
+- **Definisi Operasional**: 26 items × 7-point semantic differential scale → skor per dimensi (Attractiveness, Perspicuity, Efficiency, Dependability, Stimulation, Novelty)
+- **Cara Mengukur**: Post-task questionnaire dengan format pasangan kata (misal: "buruk/baik", "kusut/teratur")
+- **Validasi Construct**: UEQ adalah instrumen standar dengan Cronbach's α 0.76-0.84 per dimensi; referensi benchmark untuk aplikasi lokal Indonesia belum ada, jadi gunakan benchmark umum
+- **Justifikasi**: UEQ dipilih sebagai complement SUS untuk capture UX holistik (bukan hanya usability); sudah dipakai studi SIGNAL 2023, memungkinkan trend analysis
   - Ground truth: user rating ≥3.5 = positive; rating <3.5 = negative
 - **Cara Mengukur**: Hitung TP, FP, FN per kategori → hitung precision & recall → F1 per kategori → weighted by category distribution
 - **Justifikasi**: Standar metrik akurasi sistem rekomendasi; F1 dipilih (bukan Accuracy) karena dataset mungkin imbalanced
@@ -142,18 +155,21 @@ RQ → Concept → Variable → Metric → Data → Result
 
 Gunakan RQ dari WS-04. Definisikan variabel dan metriknya.
 
-**RQ:** Apakah metode Dynamic Serendipity Adjustment (DSA) menghasilkan skor Unexpectedness yang lebih tinggi tanpa menurunkan F1-Score lebih dari 2% dibandingkan dengan metode Hybrid Recommendation pada dataset e-commerce?
+**RQ:** Apakah terdapat perbedaan signifikan pada skor usability (SUS) dan user experience (UEQ) antara SIGNAL dan New Sakpole pada ketiga fase user journey kritis (registrasi, verifikasi identitas, pembayaran)?
 
 | Variabel | Tipe | Konsep Abstrak | Metrik Konkret | Skala (NOIR) | Satuan |
 |----------|------|---------------|----------------|-------------|--------|
-| Strategi Pembobotan Serendipity | IV | Pendekatan penyesuaian parameter kejutan | Categorical: Static Weighting (Hybrid) vs Dynamic Weighting (DSA) | Nominal | — |
-| Unexpectedness (Serendipity) | DV | Tingkat kejutan/novelti rekomendasi produk | Unexpectedness Score (proporsi produk baru terhadap total rekomendasi) | Ratio | 0.0–1.0 (persentase) |
-| F1-Score (Akurasi) | DV | Keseimbangan presisi dan recall relevansi produk | F1-weighted (weighted average dari semua kategori produk) | Ratio | 0.0–1.0 (decimal) |
-| Kategori Produk | CV | Jenis produk yang merekomendasikan (fashion, elektronik, dll) | Categorical: Product Categories dalam dataset | Nominal | — |
-| Perilaku User | CV | Pola interaksi user (browsing vs buying) | Categorical: User Phase (browsing/buying) atau Ordinal: Click Count | Ordinal | Jumlah klik per sesi |
+| Platform Aplikasi Pajak | IV | Jenis sistem yang diuji | Categorical: SIGNAL vs New Sakpole | Nominal | — |
+| Fase User Journey | IV | Tahap spesifik dalam workflow pembayaran pajak | Categorical: Registrasi, Verifikasi Identitas, Pembayaran | Nominal | — |
+| Usability Score | DV | Kemudahan penggunaan aplikasi | System Usability Scale (SUS) Score = (jumlah item × scoring) / 10 × 2.5 | Ratio | 0–100 |
+| User Experience Score | DV | Pengalaman multidimensi pengguna | UEQ Score (6 dimensi: Attractiveness, Perspicuity, Efficiency, Dependability, Stimulation, Novelty) | Ordinal | 1–7 per item; rata-rata per dimensi 1–7 |
+| Task Completion Time | DV | Waktu penyelesaian task | Durasi dari start hingga sukses konfirmasi | Ratio | Detik (s) |
+| Task Success Rate | DV | Proporsi pengguna berhasil | Jumlah responden sukses / Total responden per fase | Ratio | % (0–100) |
+| Digital Literacy | CV | Kemampuan pengguna dengan teknologi | Categorical: Rendah (≤2 jam/hari), Sedang (2-6 jam), Tinggi (>6 jam) | Ordinal | — |
+| Usia Pengguna | CV | Demografi responden | Ordinal atau Categorical: <30 th, 30-50 th, >50 th | Ordinal | Tahun |
 
-**Apakah ada lompatan logis dalam rantai?** [x] Ya / [ ] Tidak
-> Jika ya, di mana? Dari "Strategi Pembobotan" (IV) → harus jelaskan bagaimana "real-time adaptation mechanism" dioperasionalisasi. Perlu ditambah: **Mechanism (How): Real-time perilaku user dideteksi melalui click log dan phase recognition, kemudian parameter serendipity dalam DSA disesuaikan secara dinamis.**
+**Apakah ada lompatan logis dalam rantai?** [ ] Ya / [x] Tidak
+> Tidak ada. Setiap langkah terdokumentasi: RQ → IV (platform × phase) → DV (SUS, UEQ, task metrics) → data source (questionnaire post-task, log sistem, timer) → analysis (statistical comparison per phase).
 
 ---
 
@@ -163,15 +179,18 @@ Evaluasi metrik DV yang dipilih di Latihan 1 menggunakan 3 kriteria.
 
 | Kriteria | Skor (1-5) | Justifikasi |
 |----------|-----------|-------------|
-| Representative | 4 | **F1-Score** mewakili keseimbangan precision-recall akurasi rekomendasi secara keseluruhan (skor 4, bukan 5, karena focus pada relevansi tetapi tidak menangkap user satisfaction langsung). **Unexpectedness Score** mewakili proporsi produk baru/novel terhadap total rekomendasi, valid untuk operasionalisasi serendipity. Keduanya mengukur aspek yang dimaksud. |
-| Sensitive | 4 | Kedua metrik cukup sensitif menangkap perbedaan bermakna antara metode. **DSA diharapkan meningkatkan Unexpectedness** (range 0.0–1.0 scale), sementara **F1 hanya boleh turun max 2%**. Perbedaan 2% F1 masih terdeteksi dengan baik pada dataset besar (>10K transaksi, power test dengan α=0.05 akan significant). Unexpectedness skala ratio juga peka terhadap variasi 5–10%. Tidak ada ceiling effect karena baseline F1≈0.80 (masih ada ruang turun 2%). |
-| Feasible | 5 | Kedua metrik **sangat feasible** dikumpulkan otomatis: (1) F1-Score dihitung langsung dari prediksi vs ground truth (user rating >3.5 = positive); (2) Unexpectedness Score dihitung dari log rekomendasi (tracking produk baru vs repeat dalam history 90 hari); (3) Keduanya bisa dikomputasi on-the-fly di backend tanpa setup tambahan. Data sudah ada di e-commerce transaction log. |
+| Representative | 5 | **SUS Score** adalah instrumen standar untuk usability aplikasi (standar industri sejak 1996). **UEQ Score** mengukur 6 dimensi UX secara holistik (lebih comprehensive dari SUS). Kedua instrumen diakui internasional dan sudah dipakai studi SIGNAL sebelumnya (memungkinkan trend comparison). **Task metrics** (time, success, error) adalah hard metrics yang objektif. Semua metrik secara langsung mengukur apa yang ingin dibandingkan: usability dan UX antara kedua platform. |
+| Sensitive | 4 | Kedua instrumen cukup sensitif menangkap perbedaan bermakna. **SUS score range 0-100** → perbedaan 5-10 poin signifikan (dari paper 2024 SIGNAL skor ~55). **UEQ per dimensi 1-7 scale** → perbedaan 0.5-1.0 poin terdeteksi dengan baik dengan N≥30 responden per kondisi (power test α=0.05). **Task time dan success rate** adalah hard metrics yang sangat sensitif (jika New Sakpole 2x lebih cepat, akan terlihat jelas). Satu-satunya tidak max (skor 4 bukan 5): UEQ dimensi "Novelty" mungkin ceiling effect karena kedua apps sama-sama baru bagi many users. |
+| Feasible | 5 | Kedua instrumen **sangat feasible** dikumpulkan: (1) SUS & UEQ adalah questionnaire standard yang bisa diadministrasikan post-task via paper atau digital form (~5-10 menit per responden); (2) Task metrics (time, success/fail) bisa ditrack otomatis via sistem atau manual observation; (3) Instrumen sudah validated — tidak perlu pilot ekstensif; (4) Setup minimal: hanya perlu responden willing, 30 menit per orang × 2 platform × 3 fase ≈ total 3 jam per responden. Feasible untuk eksperimen lokal. |
 
 **Apakah perlu secondary metric?** [x] Ya / [ ] Tidak
-> Jika ya, apa dan mengapa? **Coverage** (berapa % katalog produk yang pernah direkomendasikan >= 1x selama eksperimen) dan **Novelty** (average recency rank dari rekomendasi terhadap tanggal publikasi produk). Alasan: (1) Unexpectedness saja tidak cukup mengukur diversity — produk bisa unexpected tapi kategorinya tetap monoton. (2) Coverage mengukur apakah DSA benar-benar showcase "hidden gems" dari long-tail catalog, bukan hanya produk baru acak. (3) Novelty membedakan "baru bagi user" vs "baru di platform" — melengkapi perspektif temporal. Ketiga metrik ini bersama-sama memberikan picture lengkap tentang serendipity quality.
+> Jika ya, apa dan mengapa? 
+> - **System Usability Confidence Score**: Rating "apakah saya percaya data yang dimasukkan sudah terproses?" (1-5 Likert). Alasan: verifikasi identitas adalah pain point utama SIGNAL; confidence score menangkap aspek trust/reassurance yang tidak tercakup SUS/UEQ.
+> - **Error Type Breakdown**: Kategorisasi jenis error (salah input vs sistem timeout vs UI confusing) untuk diagnosa root cause. Alasan: tidak cukup hanya "error rate naik 5%" — perlu tahu error apa untuk rekomendasi perbaikan spesifik.
+> - **Perceived Workload (NASA TLX single item)**: Rating mental/physical demand (1-5 Likert). Alasan: melengkapi UEQ "Efficiency" dengan perspektif subjektif usability cognitive load.
 
 **Contoh kasus ceiling effect untuk metrik ini:**
-> **Skenario ceiling effect pada F1-Score**: Jika baseline Hybrid Recommendation sudah sangat akurat (F1 > 0.92), ketika DSA menambah serendipity, F1 tidak bisa turun hanya 2% karena sudah mendekati ceiling (akurasi maksimal). Dalam kasus ini, ceiling effect akan memaksa F1 turun minimal 5–8%, menggagalkan hypothesis non-inferiority (H1: turun max 2%). **Mitigation strategy**: (1) Pre-select dataset dengan F1 baseline 0.75–0.85 agar ada margin penurunan 2% yang realistis; (2) Validasi baseline melalui pilot test sebelum eksperimen penuh; (3) Jika ceiling terjadi, revisi metric: gunakan **Relative F1 Drop** (% penurunan terhadap baseline) bukan absolute, atau kombinasikan dengan user satisfaction rating.
+> **Skenario ceiling effect pada SUS Score**: Jika New Sakpole baseline SUS sudah sangat tinggi (≥75), dan SIGNAL skor~55, perbedaan 20 poin signifikan. NAMUN jika New Sakpole skor 85, tidak bisa meningkat lebih dari 15 poin (ceiling 100). Dalam kasus ini, efek perbedaan akan terlihat tapi magnitude diminished. **Mitigation**: (1) Pre-test dengan small sample (5 orang per app × 3 fase) untuk cek baseline skor; (2) Jika ceiling terdeteksi, gunakan **Relative Improvement** (% gain terhadap baseline) bukan absolute poin; (3) Fokus pada phase-spesifik: jika fase registrasi New Sakpole ceiling, gunakan focus group untuk explore dimensi UX lain (trust, satisfaction dengan visual design, etc.).
 
 ---
 
@@ -181,35 +200,40 @@ Bayangkan data yang akan dikumpulkan dari eksperimen. Evaluasi 4 dimensi kualita
 
 | Dimensi | Pertanyaan | Jawaban | Strategi Mitigasi |
 |---------|-----------|---------|------------------|
-| Completeness | *Apakah semua data point terkumpul?* | **Risks tinggi** pada log rekomendasi; ada kemungkinan data miss karena timeout API atau user keluar aplikasi tiba-tiba sebelum rating dikumpulkan. Dari 10K user, diperkirakan 5–8% data tidak tercatat (incomplete logs). | **Strategi**: (1) Setup query logs dengan retry mechanism pada API; (2) Implementasi graceful shutdown untuk menyimpan sesi user yang pending; (3) Gunakan data cleaning: hapus session dengan missing >3 interaksi dalam satu task; (4) Pre-register threshold: data dianggap complete jika ≥92% records tercatat. |
-| Consistency | *Apakah ada kontradiksi internal?* | **Risks sedang** pada timestamp dan user behavior. Contoh: user_id X melakukan 2 checkout simultan (race condition), atau timestamp interaksi tidak monoton (klik ke belakang). Juga: Unexpectedness Score mungkin melebihi 1.0 karena pembagian salah atau metric formula conflict dengan definisi. | **Strategi**: (1) Validasi timestamp: reject records dengan non-monotonic timestamps dalam satu sesi; (2) Deduplicate: hapus duplikat checkout/rating dalam window 5 detik; (3) Validasi range: Unexpectedness ∈ [0, 1], F1 ∈ [0, 1], bukan negatif; (4) Cross-check: jika user rating = 5 bintang tapi click count = 1, flag sebagai suspicious dan review; (5) Implement data validation schema sebelum import ke analytics. |
-| Validity | *Apakah benar-benar mengukur yang dimaksud?* | **Construct validity sedang**: F1-Score adalah metrik standar akurasi (valid). Unexpectedness Score (proporsi produk baru) valid untuk serendipity—NAMUN asumsi implisit: "produk baru bagi user = unexpected". Jika user sudah lihat produk X di browse history tapi tidak di rekomendasi sebelumnya, apakah tetap dihitung unexpected? Perlu definisi operasional ketat. | **Strategi**: (1) Pre-define: "Unexpected = produk yang belum pernah diklik/dibeli user dalam 90 hari terakhir AND rank novelty > median"; (2) Validasi construct: sebelum eksperimen, ambil 100 rekomendasi random, tanya 10 user apakah produk itu benar-benar "unexpected"—jika agreement <70%, revisi formula; (3) Triangulation: gunakan secondary metric (Coverage, Novelty) untuk validate bahwa Unexpectedness Score benar mengukur serendipity. |
-| Representativeness | *Apakah sampel mewakili populasi target?* | **Risks tinggi** pada bias representasi: Dari populasi 1M user e-commerce Indonesia, jika data hanya dari 10K user aktif/regular, sampling bias terjadi (tidak mewakili casual/seasonal users). Juga: kategori produk mungkin skewed (fashion >50%, elektronik >30%, lainnya <20%), tidak seimbang. | **Strategi**: (1) Stratified random sampling: bagi user per kategori dan activity level (heavy, medium, light), sample proportional dari setiap strata; (2) Dataset balance: jika fashion dominan, oversample kategori lain agar analisis per-kategori valid; (3) Document population characteristics: "Dataset mewakili: 40% heavy users (>20 interaksi/bulan), 40% medium users, 20% light users; kategori fashion 45%, elektronik 35%, lainnya 20%"; (4) Conduct sensitivity analysis: jalankan eksperimen juga pada heavy users saja, medium saja, dll. Jika hasil konsisten, maka representativeness cukup baik. |
+| Completeness | *Apakah semua responden menyelesaikan semua fase pada kedua aplikasi?* | **Risks sedang-tinggi**. Ada kemungkinan dropout: responden selesai registrasi SIGNAL, tapi jenuh tidak melanjutkan ke fase pembayaran; atau sebaliknya, merasa Sakpole lebih mudah dan skip tahap verifikasi. Juga: beberapa responden mungkin tidak mengisi questionnaire lengkap (SUS 10 item, UEQ 26 item = 36 item panjang, butuh 15-20 menit). Estimasi: 10-15% dropout rate. | **Strategi**: (1) Incentive: bayar responden per fase completed, bukan lump sum, untuk encourage completion semua fase; (2) Questionnaire adaptive: jika responden tired, gunakan SUS saja first, UEQ sebagai optional; (3) Protocol clarity: sebelum mulai, jelaskan estimasi waktu dan pentingnya lengkap semua fase; (4) Pre-register: data hanya dianggap valid jika ≥90% complete (6 dari 6 sub-tasks selesai); (5) Intention-to-treat analysis: jika dropout, coba kontak untuk late completion atau exclude secara dokumentasi jelas. |
+| Consistency | *Apakah ada kontradiksi logis dalam data?* | **Risks sedang**. Contoh: responden rate SUS item "Sistem ini mudah digunakan" dengan score 5 (sangat setuju), tapi Task Success Rate 0% (gagal semua tugas) → kontradiktif. Atau: UEQ "Efisiensi" rating tinggi, tapi task completion time >10 menit untuk registrasi sederhana. Juga mungkin: ada data duplikat (responden didata dua kali), timestamp tidak masuk akal (verifikasi selesai sebelum registrasi mulai). | **Strategi**: (1) Validasi range: SUS item 1-5, UEQ 1-7, task time >0 detik, success rate 0-100%; reject outliers seperti task time 0.001 detik (tidak masuk akal); (2) Cross-check logic: jika success rate=0% tapi SUS score >75, flag untuk review manual (mungkin responden tidak paham instruction atau data entry error); (3) Deduplicate: merge records dengan responden_id + platform + phase sama, ambil record paling lengkap; (4) Timestamp validation: pastikan registrasi_end ≤ verifikasi_start ≤ pembayaran_start per responden. (5) Video review: kalau ada kontradiksi, tonton video task untuk verify apakah benar-benar sukses atau data entry error. |
+| Validity | *Apakah instrumen benar-benar mengukur yang dimaksud?* | **Construct validity sedang-tinggi** untuk SUS (instrumen established sejak 1996, validity terbukti). **UEQ juga established** (validity reported Cronbach's α 0.76-0.84). **Namun construct validity perlu validasi di konteks lokal**: SUS item "I think I would like to use this system frequently" — apakah responden Indonesia paham "frequently" berarti apa? Task time adalah metrik objektif (valid). **UEQ Novelty dimensi mungkin problematic**: kedua apps sama-sama "aplikasi pajak baru" bagi responden → semua rate novelty tinggi (ceiling effect). | **Strategi**: (1) Cognitive walkthrough: sebelum eksperimen penuh, 5 responden pilot → tanya mereka paham item satu per satu (think-aloud protocol); (2) Translate validation: SUS sudah ada versi Bahasa Indonesia (dari studi lain), gunakan itu instead of translating sendiri; (3) UEQ: pre-note bahwa Novelty dimension mungkin ceiling effect, tidak akan interpret sebagai platform yang truly novel tapi responden expectation mismatch; (4) Triangulation: gunakan task metrics (objective) untuk cross-validate subjective SUS/UEQ scores (jika task time tinggi tapi SUS score tinggi, ada issue); (5) Konten validity: involve HCI expert untuk review instrumen sebelum deploy. |
+| Representativeness | *Apakah sampel responden mewakili pengguna actual SIGNAL/Sakpole?* | **Risks tinggi pada seleksi bias**. Real users SIGNAL/Sakpole adalah mostly orang yang perlu bayar pajak kendaraan — skewed ke usia 30-60 tahun, pendapatan menengah ke atas (punya kendaraan), variable digital literacy. Jika recruitment di kampus universitas, bakal skewed ke muda/tech-savvy. Jika recruitment di kantor pajak, skewed ke yang sudah digital-literate (karena datang ke kantor pajak untuk self-service). Ideal perlu quota sampling dari berbagai segment. | **Strategi**: (1) Stratified quota sampling: target demographics → 20% umur <30, 50% umur 30-55, 30% umur >55; 40% Android phone, 40% iPhone, 20% browser desktop; 30% self-rate digital literacy "rendah", 50% "sedang", 20% "tinggi"; (2) Recruitment diverse: recruit tidak hanya dari online, tapi juga offline (kantor pajak, kelurahan) untuk catch non-digital-native users; (3) Document characteristics: laporkan di write-up "sampel mewakili: X% female, Y% rural, Z% pensiunan, dll" agar readers dapat judge generalizability; (4) Sensitivity analysis: jalankan analisis terpisah per demographic group (usia <30 vs 30-55 vs >55) → jika pola konsisten across groups, representativeness baik; jika hasil beda drastis per group, berarti ada moderating effect; (5) Compare to population: jika ada statistics resmi "berapa % SIGNAL users usia <30", bandingkan dengan sampel — jika deviasi >10%, dokumentasikan dan acknowledge limitation. |
 
 ---
 
 ## Refleksi
 
-> Mengapa memilih metrik setelah melihat data dianggap p-hacking? Apa bedanya dengan eksplorasi data yang sah?
+> Dalam desain studi komparatif SIGNAL vs New Sakpole, mengapa penting untuk pre-register metrik DV sebelum eksperimen bukan sesudah melihat data?
 
 **Jawaban:**
 
-**P-hacking** adalah praktik memilih metrik, analisis statistik, atau subset data *setelah* melihat hasil eksperimen dengan tujuan membuat hasil menjadi signifikan secara artifisial. Contoh: "Jika saya ukur F1 saja, tidak signifikan (p=0.08). Tapi jika saya ukur Precision saja, signifikan (p=0.02). Saya pilih Precision."
+Pre-registrasi metrik penting karena tanpa itu, kita bisa tergoda untuk **cherry-pick hasil yang sudah dilihat**. Contoh: "SUS score SIGNAL 50, New Sakpole 60 — perbedaan 10 poin significant. Tapi kalau lihat per fase, hanya verifikasi phase beda signifikan (fase registrasi hampir sama skor-nya). Saya lapor hanya hasil verifikasi phase saja." Ini adalah **selective reporting**, bentuk p-hacking.
 
-**Perbedaan fundamental dengan eksplorasi data yang sah:**
+**Perbedaan fundamental:**
 
-| Aspek | P-hacking | Eksplorasi Data Sah |
+| Aspek | Selective Reporting (P-hacking) | Transparent Reporting (Riset Sah) |
 |-------|-----------|-------------------|
-| **Kapan metrik dipilih?** | *Setelah* melihat data & hasil eksperimen | *Sebelum* eksperimen (pre-registration) |
-| **Tujuan pemilihan** | Membuat hasil terlihat signifikan (bias) | Memahami fenomena lebih mendalam (ilmiah) |
-| **Transparansi** | Dihiden/tidak dilaporkan | Dilaporkan jelas: "metric ini exploratory, bukan confirmatory" |
-| **Berapa metrik diuji?** | Banyak (fishing expedition), hanya report yang signifikan | Terbatas, semua dilaporkan termasuk yang not significant |
-| **Threshold statistik** | Flexible (cari hingga p<0.05) | Fixed (α=0.05 ditetapkan sebelumnya) |
+| **Metrik dipilih kapan?** | *Setelah* melihat data eksperimen | *Sebelum* eksperimen dimulai (dokumentasi RQ + DV) |
+| **Yang dilaporkan** | Hanya metrik yang "significant" atau "menarik" | Semua metrik yang pre-register, signifikan atau tidak |
+| **Contoh selektif** | "SUS saja signifikan, UEQ tidak — jadi saya lapor SUS saja" | "SUS signifikan (p=0.03), UEQ tidak (p=0.12) — lapor keduanya, explain perbedaan" |
+| **Analisis tambahan** | Dilakukan *after seeing results* (bias) | Dilakukan *planned in advance* sebagai secondary analysis |
 
-**Contoh konkret dalam penelitian DSA:**
+**Contoh konkret untuk SIGNAL vs New Sakpole:**
 
-❌ **P-hacking:** "Setelah lihat data, ternyata F1 turun 5% (gagal). Tapi Precision naik 3% dan Novelty naik 8%. Saya hanya lapor Precision dan Novelty aja."
+❌ **Selective reporting:** 
+- Lihat data: SUS significant (p=0.02), Task Time significant (p=0.01), tapi UEQ tidak (p=0.18)
+- Lapor: "SIGNAL dan New Sakpole berbeda signifikan pada usability dan kecepatan task"
+- Ignore: Tidak mention bahwa UEQ (yang dijanjikan sebagai DV utama di WS-04) not significant
 
-✓ **Eksplorasi sah:** "Saya pre-register metric: F1, Unexpectedness, Coverage. Dari hasil: F1 turun 2% (sesuai), Unexpectedness naik 12% (lebih baik dari expected 5%), Coverage turun 3% (unexpected). Saya lapor semua hasil lengkap dan diskusikan mengapa Coverage turun meski Unexpectedness naik."
+✓ **Transparent reporting:**
+- Pre-register: DV1=SUS, DV2=UEQ, DV3=Task Time (semua sama penting)
+- Lihat data: SUS sig (p=0.02), Task Time sig (p=0.01), UEQ not sig (p=0.18)
+- Lapor: "SUS dan task time menunjukkan SIGNAL vs New Sakpole signifikan berbeda (p<0.05). Namun UEQ score tidak signifikan (p=0.18), suggesting keduanya similar pada dimensi UX 6-faktor. Ini unexpected — mungkin karena ceiling effect pada dimensi 'Novelty' atau metrik ini less sensitive untuk digital payment app. Butuh investigasi lebih lanjut."
 
-**Kunci membedakan keduanya:** Apakah metrik sudah **ditentukan sebelum melihat data** dan apakah **semua hasil dilaporkan** (tidak cherry-picked)?
+**Praktik best practice:** Simpan **pre-registration document** (bisa di OSF.io atau git) yang berisi RQ + IV + DV semua detail sebelum data collection, jadi tidak bisa berubah-ubah sesuai hasil.
