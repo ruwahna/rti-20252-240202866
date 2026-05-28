@@ -68,34 +68,34 @@ Jika rantai ini tidak lengkap, RQ belum mature. Bi-directional: RQ yang tidak bi
 RQ-CONTRIBUTION-HYPOTHESIS
 
 **Gap Statement:** 
-Belum adanya mekanisme adaptasi parameter *serendipity* yang dinamis untuk mengatasi *filter bubble* pada sistem rekomendasi e-commerce (masalah parameter statis).
+Belum ada kerangka evaluasi komparatif sistematis untuk membandingkan SIGNAL dan New Sakpole pada tugas-tugas kritis (registrasi, verifikasi identitas, pembayaran) menggunakan instrumen evaluasi yang identik. Studi existing terpisah per platform dengan metodologi berbeda (SUS vs TAM), sehingga tidak bisa dibandingkan langsung.
 
 **Research Question:**
 - **Tipe:** [x] Comparison  [ ] Improvement  [ ] Exploratory
-- **Formulasi:** Apakah metode `Dynamic Serendipity Adjustment` (DSA) menghasilkan skor *Unexpectedness* yang lebih tinggi tanpa menurunkan *F1-Score* lebih dari 2% dibandingkan dengan metode `Hybrid Recommendation` pada dataset e-commerce?
-- **Variabel IV:** Jenis strategi pembobotan (*Static weighting* vs *Dynamic weighting*).
-- **Variabel DV:** Skor *Unexpectedness* (Serendipity) dan *F1-Score* (Akurasi).
-- **Metrik:** *F1-Score*, *Unexpectedness Score*, dan *Novelty*.
-- **Dataset:** Dataset transaksi e-commerce (Log interaksi user-item).
-- **Baseline:** *Hybrid Recommendation* (Wati et al., 2021).
+- **Formulasi:** Apakah terdapat perbedaan signifikan pada skor usability (SUS) dan user experience (UEQ) antara SIGNAL dan New Sakpole pada ketiga fase user journey kritis (registrasi, verifikasi identitas, pembayaran) ketika dievaluasi dengan instrumen evaluasi yang identik?
+- **Variabel IV (Independent):** Platform aplikasi pajak (SIGNAL vs New Sakpole); Fase user journey (registrasi, verifikasi identitas, pembayaran).
+- **Variabel DV (Dependent):** SUS Score (Usability), UEQ Score (User Experience), Task Completion Time, Task Success Rate, Error Rate.
+- **Metrik:** SUS Score (range 0-100), UEQ Score (6 dimensi), Task completion time (detik), Success rate (%), Error rate (%).
+- **Dataset:** Data dari responden yang melakukan ketiga fase tugas pada kedua platform.
+- **Baseline:** SUS Score SIGNAL 2024 (~55), UEQ Score SIGNAL 2023.
 
 **Quality Check RQ:**
-- [x] Variabel spesifik
-- [x] Metrik jelas
-- [x] Baseline ada
-- [x] Konteks disebutkan
-- [x] Memerlukan eksperimen
+- [x] Variabel spesifik (platform, phase, metrics)
+- [x] Metrik jelas (SUS, UEQ, task metrics)
+- [x] Baseline ada (existing SIGNAL studies)
+- [x] Konteks disebutkan (three user journeys)
+- [x] Memerlukan eksperimen (paired comparison study)
 
 **Contribution Statement:**
-- **Apa yang baru diketahui:** Bukti empiris mengenai efektivitas penyesuaian parameter kejutan secara otomatis dalam meningkatkan eksplorasi pengguna tanpa merusak relevansi rekomendasi.
-- **Jenis kontribusi:** [x] Improvement  [x] Comparison  [ ] Novel approach
-- **Gap yang diisi:** Mengisi *Method Gap* dengan mengganti parameter statis menjadi mekanisme dinamis berbasis perilaku *real-time* user.
+- **Apa yang baru diketahui:** Bukti empiris perbedaan sistematis antara aplikasi pajak nasional dan regional dalam hal usability dan user experience pada fase-fase spesifik transaksi, serta identifikasi faktor desain mana yang menjadi driver utama perbedaan tersebut.
+- **Jenis kontribusi:** [x] Comparison  [x] Improvement (rekomendasi perbaikan)  [ ] Novel approach
+- **Gap yang diisi:** Mengisi Method Gap dan Context Gap dengan menyediakan kerangka evaluasi komparatif terstandar dan mengevaluasi kedua platform secara bersamaan pada domain lokal Indonesia.
 
 **Hypothesis Pair:**
-- **H₀:** Tidak ada perbedaan signifikan pada skor *Unexpectedness* antara metode DSA dan Hybrid standar.
-- **H₁:** Metode DSA menghasilkan skor *Unexpectedness* yang signifikan lebih tinggi dengan penurunan *F1-Score* yang tidak lebih dari 2% (non-inferior).
-- **Threshold:** Signifikansi statistik α = 0.05.
-- **Justifikasi threshold:** α=0.05 adalah standar riset statistik untuk menolak hipotesis nol.
+- **H₀:** Tidak ada perbedaan signifikan pada SUS Score dan UEQ Score antara SIGNAL dan New Sakpole pada ketiga fase user journey.
+- **H₁:** Ada perbedaan signifikan pada SUS Score dan/atau UEQ Score antara SIGNAL dan New Sakpole, dengan prediksi New Sakpole akan menunjukkan skor lebih tinggi pada minimal dua dari tiga fase berdasarkan studi sebelumnya.
+- **Threshold:** Signifikansi statistik α = 0.05 (two-tailed independent t-test untuk per-fase comparison).
+- **Justifikasi threshold:** α=0.05 adalah standar riset HCI untuk mendeteksi perbedaan signifikan dalam evaluasi usability antar platform.
 ---
 
 ## Latihan 1 — Dari Gap ke RQ
@@ -142,18 +142,18 @@ Lengkapi rantai dari RQ hingga metode analisis.
 
 | Tahap | Isi |
 |-------|-----|
-| **RQ** | Apakah DSA menghasilkan skor Unexpectedness lebih tinggi tanpa menurunkan F1-Score secara signifikan? |
-| **Variable (IV)** | Strategi pembobotan kejutan (*Static* vs *Dynamic*). |
-| **Variable (DV)** | Tingkat Serendipity (*Unexpectedness*) dan Akurasi (*F1-Score*). |
-| **Metric** | *Unexpectedness Score*, *F1-weighted*, *p-value*. |
-| **Data source** | Dataset publik e-commerce (seperti Amazon Metadata) atau log transaksi UMKM. |
-| **Analysis method** | *Preprocessing*, implementasi algoritma, *K-fold cross-validation*, dan *paired t-test* untuk uji signifikansi. |
+| **RQ** | Apakah terdapat perbedaan signifikan pada SUS dan UEQ antara SIGNAL dan New Sakpole pada tiga fase user journey (registrasi, verifikasi, pembayaran)? |
+| **Variable (IV)** | Platform aplikasi (SIGNAL vs New Sakpole); Fase task (registrasi, verifikasi identitas, pembayaran). |
+| **Variable (DV)** | SUS Score (Usability), UEQ Score (6 dimensi UX), Task completion time, Success rate, Error rate. |
+| **Metric** | SUS Score (0-100 skala), UEQ Score (per dimensi), Task time (detik), Success % dan Error %. |
+| **Data source** | Responden pengguna aktual yang melakukan tugas pada kedua platform (minimal 30 orang per platform untuk validitas statistik). |
+| **Analysis method** | Deskriptif statistik per fase, independent t-test atau Mann-Whitney U test untuk perbandingan per metrik, two-way ANOVA untuk melihat efek platform × phase terhadap SUS/UEQ. |
 ---
 
 ## Refleksi
 
-**Judul:** Optimasi Serendipity pada Sistem Rekomendasi E-Commerce untuk Mengatasi Filter Bubble.
+**Judul:** Analisis Komparatif Usability dan User Experience pada Layanan Pajak Kendaraan Digital: SIGNAL vs New Sakpole.
 
-**RQ yang diekstrak:** Apakah implementasi pembobotan dinamis mampu meningkatkan variasi item yang mengejutkan pengguna tanpa mengurangi ketepatan prediksi produk yang dibutuhkan?
+**RQ yang diekstrak:** Apakah New Sakpole menunjukkan skor usability (SUS) dan user experience (UEQ) yang lebih baik dari SIGNAL, terutama pada fase verifikasi identitas yang saat ini menjadi pain point utama SIGNAL berdasarkan keluhan Play Store?
 
-**Komponen yang hilang:** Dataset yang memiliki label konteks sesi (sedang *browsing* atau *buying*) untuk pengujian yang lebih akurat secara *real-time*.
+**Komponen yang hilang:** Breakdown responden berdasarkan demografi (usia, tingkat digital literacy) untuk analisis sub-grup—apakah perbedaan platform signifikan untuk semua demografi atau hanya untuk kelompok tertentu (misal: user senior lebih sulit dengan SIGNAL?).
