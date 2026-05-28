@@ -54,24 +54,24 @@ Mata kuliah ini menggunakan pendekatan **Positivist** (fenomena TI bisa diukur o
 
 ```
 Nama Peneliti    : Indah Ruwahna Anugraheni
-Tanggal          : 11 April 2026
+Tanggal          : 17 Mei 2026
 
 1. Ketika membaca klaim "metode X 95% akurat":
-   - Pertanyaan pertama saya: Apakah data yang digunakan cukup besar dan representatif?
-   - Data yang dibutuhkan untuk verifikasi: Dataset, metode evaluasi, dan hasil pengujian lengkap
+   - Pertanyaan pertama saya: Angka itu diukur pakai metrik apa, untuk siapa, dan dibandingkan dengan apa?
+   - Data yang dibutuhkan untuk verifikasi: Instrumen evaluasi (SUS/UEQ), jumlah responden, profil responden, serta konteks tugas yang diuji
 
 2. Posisi paradigma:
-   - Pendekatan: [☑] Positivis  [☑] Interpretivis  [☑] Design Science  [☑] Mixed
-   - Alasan: Karena menggunakan data kuantitatif dan juga membangun sistem
+   - Pendekatan: [☑] Positivis  [ ] Interpretivis  [☑] Design Science  [ ] Mixed
+   - Alasan: Topik berfokus pada pengukuran usability secara objektif dan pemetaan perbaikan antarmuka berbasis bukti
 
 3. Identifikasi distorsi:
-   - Asumsi tersembunyi: Data dianggap mewakili kondisi nyata
-   - Sumber bias potensial: Sampling bias dan overfitting
-   - Langkah mitigasi: Menggunakan dataset beragam dan validasi silang
+   - Asumsi tersembunyi: Semua pengguna punya literasi digital yang sama
+   - Sumber bias potensial: Bias ulasan negatif di Play Store, responden didominasi pengguna muda, dan efek wilayah (nasional vs daerah)
+   - Langkah mitigasi: Gunakan lebih dari satu sumber bukti (SUS, UEQ, sentimen), tulis batasan sampel secara eksplisit, dan gunakan indikator yang sama saat membandingkan
 
 4. Komitmen etika:
-   - Data yang tidak akan dimanipulasi: Data hasil eksperimen dan data mentah
-   - Batasan yang diakui sejak awal: Dataset terbatas dan kondisi pengujian tidak mencerminkan semua situasi nyata
+   - Data yang tidak akan dimanipulasi: Nilai metrik asli dari paper, hasil coding literatur, dan kutipan temuan
+   - Batasan yang diakui sejak awal: Tidak semua paper memakai instrumen dan populasi yang identik
 ```
 
 ---
@@ -81,22 +81,22 @@ Tanggal          : 11 April 2026
 Pilih satu paper riset di bidang TI yang mengklaim "metode X meningkatkan performa." Telusuri setiap tahap Research Trust Model.
 
 **Paper yang dipilih:**
-> Judul : Analisis Klasifikasi Email Spam Menggunakan Algoritma Naïve Bayes
-> Penulis (Tahun): Azan Rahman, Andi Maslan (2024)
+> Judul : Analisis Usability Pada Aplikasi Samsat Digital Nasional (SIGNAL) Menggunakan Metode System Usability Scale (SUS)
+> Penulis (Tahun): (2024)
 
 | Tahap | Apa yang Dilakukan | Potensi Distorsi |
 |-------|-------------------|-----------------|
-| Reality → Data | Mengumpulkan dataset email spam dan non-spam | Dataset mungkin tidak mewakili kondisi nyata (hanya dari sumber tertentu) |
-| Data → Processing |Preprocessing data (cleaning, tokenizing, TF-IDF) |Informasi penting bisa hilang saat pembersihan data |
-| Processing → Analysis |Melatih model Naïve Bayes dan balancing data (SMOTE) |Overfitting karena data dibuat lebih seimbang secara buatan |
-| Analysis → Inference |Menghitung akurasi model (hingga ±98%) |Hanya fokus pada akurasi tanpa metrik lain |
-| Inference → Knowledge |Menyimpulkan metode efektif untuk klasifikasi spam |Generalisasi berlebihan ke semua kondisi email |
+| Reality → Data | Mengambil data persepsi pengguna aplikasi SIGNAL melalui kuesioner SUS | Responden bisa tidak mewakili semua segmen (misalnya lebih banyak pengguna muda/mahir digital) |
+| Data → Processing | Membersihkan respons yang tidak lengkap atau tidak valid | Data ekstrem bisa terhapus tanpa alasan metodologis yang kuat |
+| Processing → Analysis | Menghitung skor SUS rata-rata dan memetakan ke kategori | Jika hanya pakai rata-rata, variasi pengalaman tiap kelompok pengguna bisa tertutup |
+| Analysis → Inference | Menyimpulkan tingkat kemudahan penggunaan aplikasi | Ada risiko menganggap skor SUS sebagai gambaran semua aspek UX, padahal SUS fokus usability |
+| Inference → Knowledge | Menarik simpulan bahwa alur aplikasi perlu perbaikan | Generalisasi berlebihan jika konteks pengujian tidak dijelaskan (fitur apa, perangkat apa, jaringan seperti apa) |
 
-**Distorsi paling besar di tahap:** Processing → Analysis
+**Distorsi paling besar di tahap:** Reality → Data
 
 **Dua distorsi spesifik yang teridentifikasi:**
-1. Overfitting akibat penggunaan teknik balancing data (SMOTE)
-2. Sampling bias karena dataset tidak sepenuhnya representatif
+1. Sampling bias pada profil responden (usia, kemampuan digital, wilayah)
+2. Over-generalization dari satu instrumen (SUS) untuk menyimpulkan pengalaman pengguna secara keseluruhan
 ---
 
 ## Latihan 2 — Analisis Kasus Etika
@@ -118,17 +118,17 @@ Skenario: Seorang peneliti menemukan bahwa jika 3 data point outlier dihapus, ha
 
 ## Latihan 3 — Posisi Paradigma
 
-**Topik riset:** Analisis klasifikasi email spam menggunakan algoritma Naïve Bayes
+**Topik riset:** Analisis komparatif usability dan user experience aplikasi pajak kendaraan digital SIGNAL vs New Sakpole
 
 | Kriteria | Positivis | Interpretivis | Design Science |
 |----------|-----------|---------------|----------------|
-| Kesesuaian dengan topik (1–5) | 5| 1 | 4|
-| Jenis data yang dikumpulkan | Data numerik (akurasi, dataset email)| Persepsi pengguna| Data hasil sistem/model|
-| Limitasi paradigma |Tidak melihat aspek subjektif pengguna | Tidak cocok untuk data kuantitatif| Fokus pada artefak, bukan teori|
+| Kesesuaian dengan topik (1–5) | 5 | 3 | 4 |
+| Jenis data yang dikumpulkan | Skor SUS/UEQ, tingkat keberhasilan tugas, waktu tugas, error rate | Narasi keluhan pengguna dari ulasan | Rekomendasi desain perbaikan alur/fungsi |
+| Limitasi paradigma | Bisa kurang menangkap konteks emosional pengguna | Sulit membandingkan hasil secara numerik lintas platform | Fokus implementasi bisa melebar jika scope tidak dikunci |
 
 **Paradigma yang dipilih:** Positivis
 
-**Alasan:** Karena penelitian menggunakan data kuantitatif, eksperimen terukur, dan bertujuan menguji performa algoritma secara objektif.
+**Alasan:** Karena riset menekankan perbandingan terukur antar platform dengan indikator yang jelas, lalu hasilnya dipakai sebagai dasar rekomendasi perbaikan.
 
 ---
 
@@ -137,13 +137,12 @@ Skenario: Seorang peneliti menemukan bahwa jika 3 data point outlier dihapus, ha
 > Sebelum membaca materi ini, apakah pernah mempertanyakan klaim "95% akurat"? Setelah memahami rantai distorsi, pertanyaan apa yang sekarang akan diajukan saat membaca paper?
 
 **Jawaban:**
->Sebelum membaca materi ini, saya belum terlalu mempertanyakan klaim seperti “95% akurat” dan cenderung langsung mempercayainya.
+>Sebelum memahami materi ini, saya cenderung cepat percaya kalau ada paper yang menulis aplikasi "sudah baik" hanya dari satu skor.
 
->Setelah memahami rantai distorsi dalam Research Trust Model, saya menjadi lebih kritis dan akan mengajukan beberapa pertanyaan saat membaca paper, seperti:
-- Bagaimana data dikumpulkan dan apakah representatif?
-- Apakah ada bias dalam dataset?
-- Apakah metode evaluasi yang digunakan sudah tepat?
-- Apakah hanya menggunakan akurasi atau juga metrik lain seperti precision dan recall?
-Apakah hasil penelitian dapat digeneralisasi ke kondisi nyata?
+>Sekarang saya akan lebih hati-hati dan biasanya langsung cek hal ini:
+- Respondennya siapa saja, cukup beragam atau tidak?
+- Metrik yang dipakai cuma satu atau ada triangulasi (misalnya SUS + UEQ + keluhan nyata)?
+- Konteks uji jelas atau tidak (fitur yang diuji, perangkat, jaringan)?
+- Hasilnya berlaku umum atau hanya pada kondisi studi tertentu?
 
->Saya juga memahami bahwa setiap tahap dalam penelitian berpotensi mengalami distorsi, sehingga penting untuk mengevaluasi validitas dan etika penelitian sebelum menerima suatu klaim.
+>Intinya, saya tidak hanya melihat angka akhir, tapi juga melihat proses bagaimana angka itu dihasilkan.
