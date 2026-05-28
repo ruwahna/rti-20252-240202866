@@ -67,45 +67,45 @@ Masalah riset yang layak harus memenuhi 5 kriteria:
 PROBLEM STATEMENT BUILDER
 
 Domain & Konteks
-Domain   : Domain : Human-Computer Interaction (HCI) / UX UI pada platform kesehatan digital
+Domain   : Human-Computer Interaction (HCI) / Usability & User Experience pada layanan publik digital
 
-Konteks : Mobile website Halodoc pada proses pencarian dokter dan booking layanan kesehatan
+Konteks : Aplikasi dan website layanan pajak kendaraan digital nasional (SIGNAL) vs aplikasi daerah (New Sakpole Jawa Tengah)
    
 System Context
-- Input       :
-Query   pencarian pengguna (nama dokter/spesialis), lokasi pengguna, serta interaksi pengguna (klik, scroll)
+- Input       : 
+Identitas pengguna (NIK/nomor kendaraan), lokasi pembayaran, metode pembayaran, dan pilihan menu di antarmuka
 
 - Process     : 
-Sistem menampilkan daftar dokter, filtering, navigasi halaman, serta proses pemilihan jadwal dan booking
+Sistem menampilkan pilihan pajak yang berlaku, proses verifikasi identitas, input data kendaraan, perhitungan pajak, proses pembayaran
 
 - Output      : 
-Informasi dokter, jadwal tersedia, dan konfirmasi booking
+Konfirmasi pembayaran pajak, dokumen bukti pembayaran (digital)
 
 - Outcome     : 
-Pengguna berhasil atau gagal menyelesaikan proses booking
+Pengguna berhasil atau gagal menyelesaikan pembayaran pajak dalam waktu yang wajar
 
 - Constraints : 
-Ukuran layar mobile terbatas, koneksi internet, serta beban kognitif
+Keterbatasan literasi digital pengguna, kecepatan koneksi internet, keamanan transaksi
 
-- Stakeholders: Pengguna (pasien), dokter, UX designer, developer, dan platform Halodoc 
+- Stakeholders: Warga pembayar pajak, petugas samsat, developer aplikasi, Korlantas Polri, dan Bapenda Jawa Tengah 
 
 
 Fenomena → Problem
 - Fenomena yang diamati             : 
-Pengguna mengalami kesulitan dalam mencari dokter dan menyelesaikan proses booking pada mobile website Halodoc
-Gejala (symptom) yang terukur : Waktu pencarian lama (>20 detik), task success rate rendah (<60%), dan tingginya navigasi ulang (back navigation)
+Warga sering mengalami kesulitan saat menggunakan aplikasi SIGNAL untuk bayar pajak, sedangkan aplikasi New Sakpole dianggap lebih mudah
+Gejala (symptom) yang terukur : Banyak keluhan di Play Store tentang alur verifikasi rumit, waktu loading lama, error login berulang
 
 - Gejala (symptom) yang terukur     : 
-Information overload pada tampilan, navigasi tidak intuitif, serta kurangnya feedback visual pada proses booking
+Alur registrasi SIGNAL berbelit-belit, feedback sistem tidak jelas, proses verifikasi wajah sering gagal
 
 - Masalah yang didiagnosis          : 
-Information overload pada tampilan, navigasi tidak intuitif, serta kurangnya feedback visual pada proses booking
+Desain antarmuka SIGNAL terlalu kompleks untuk pengguna awam, sedangkan New Sakpole relatif lebih sederhana dalam hal alur dan visual
 
 - Masalah riset (researchable)      : 
-Belum ada studi kuantitatif yang mengevaluasi pengaruh kompleksitas informasi dan kejelasan navigasi terhadap efisiensi dan keberhasilan task pengguna pada mobile website Halodoc
+Belum ada studi komparatif yang sistematis mengukur tingkat usability dan user experience antara aplikasi pajak nasional (SIGNAL) dan aplikasi daerah (New Sakpole) pada konteks tugas-tugas kritis (registrasi, verifikasi, pembayaran)
 
 - Variabel yang terukur             : 
-Task completion time (detik), task success rate (%), jumlah klik, error rate (%), dan skor System Usability Scale (SUS)
+SUS score, task completion time (detik), task success rate (%), jumlah error, dan UEQ score (User Experience Questionnaire)
 
 
 Problem Quality Check
@@ -128,18 +128,19 @@ Penggunaan mobile website Halodoc dalam layanan kesehatan digital masih menghada
 
 Pilih satu topik di bidang TI yang diminati. Transformasikan melalui 5 tahap Problem Formation Model.
 
-**Topik awal:** UX/UI mobile website kesehatan (Halodoc) pada proses pencarian dokter dan booking
+**Topik awal:** Komparasi usability aplikasi pajak kendaraan digital SIGNAL (nasional) vs New Sakpole (Jawa Tengah)
 
 | Tahap | Hasil |
 |-------|-------|
-| Reality | Pengguna mobile sering kesulitan mencari dokter dan menyelesaikan booking di website Halodoc |
-| Observed Issue (Symptom) | - Waktu pencarian dokter > 20 detik <br> - Task success rate < 60% <br> - Banyak user kembali ke halaman sebelumnya (back navigation tinggi) | Diagnosed Problem (Root Cause) | Information overload pada tampilan mobile, struktur navigasi tidak hierarkis, serta kurangnya feedback visual pada proses booking (tidak ada progress indicator yang jelas)|
-| Researchable Problem |Belum ada studi kuantitatif yang mengevaluasi pengaruh information overload dan kejelasan navigasi terhadap efisiensi task dan keberhasilan booking pada mobile website Halodoc | 
-| Measurable Variable | - Task completion time (detik) <br> - Task success rate (%) <br> - Number of clicks <br> - Error rate (%) <br> - SUS score (System Usability Scale) |
+| Reality | Warga Jawa Tengah bisa pakai dua aplikasi untuk bayar pajak motor/mobil, tapi respons berbeda |
+| Observed Issue (Symptom) | - Skor SUS aplikasi SIGNAL lebih rendah daripada New Sakpole (data dari paper 2024) <br> - Banyak keluhan di Play Store tentang SIGNAL sulit digunakan <br> - Task completion time SIGNAL lebih lama |
+| Diagnosed Problem (Root Cause) | Desain UI/UX SIGNAL lebih kompleks, alur registrasi berbelit, feedback sistem kurang jelas, sedangkan New Sakpole lebih ringkas |
+| Researchable Problem | Belum ada studi komparatif yang sistematis dan terstruktur membandingkan usability dan UX kedua aplikasi pada tugas-tugas yang sama dengan instrumen evaluasi yang identik |
+| Measurable Variable | - SUS score <br> - UEQ score (User Experience Questionnaire) <br> - Task completion time <br> - Task success rate <br> - Error rate <br> - Serendipity/novelty dalam rekomendasi fitur |
 
 
 **Apakah terjebak solution-first thinking?** [ ] Ya / [☑] Tidak
-> Jika ya, kembali ke tahap mana?
+> Riset dimulai dari identifikasi perbedaan pengalaman pengguna, bukan langsung proposal perbaikan.
 ---
 
 ## Latihan 2 — System Context Decomposition
@@ -148,16 +149,16 @@ Gambarkan konteks sistem dari masalah riset di Latihan 1.
 
 | Komponen | Deskripsi |
 |----------|----------|
-| Input | Query pencarian (nama dokter/spesialis), lokasi user, data interaksi (klik, scroll) |
-| Process | Rendering UI mobile, filtering dokter, navigasi antar halaman, proses booking|
-| Output | Informasi dokter, jadwal tersedia, konfirmasi booking|
-| Outcome | Efisiensi pengguna (cepat/lambat) dan keberhasilan booking|
-| Constraints |Ukuran layar kecil (mobile), bandwidth terbatas, cognitive load pengguna|
-| Stakeholders | Pasien, dokter, UX designer, developer, platform Halodoc|
+| Input | NIK/STNK pengguna, pilihan metode pembayaran, data perangkat (OS, screen size) |
+| Process | Render antarmuka, validasi identitas, input data kendaraan, hitung pajak, proses pembayaran, verifikasi wajah |
+| Output | Konfirmasi pembayaran, bukti digital pajak |
+| Outcome | Pengguna berhasil/gagal bayar pajak, waktu tempuh, jumlah error yang terjadi |
+| Constraints | Literasi digital beragam, koneksi internet variabel, keamanan transaksi |
+| Stakeholders | Warga, petugas samsat, developer, Korlantas, Bapenda, regulator |
 
 **Komponen mana yang paling relevan dengan masalah riset?** 
 
->Process (UI complexity & navigation flow di mobile)
+>Process (kompleksitas alur, kejelasan feedback, konsistensi design pattern antara SIGNAL dan New Sakpole)
 
 ---
 
@@ -167,25 +168,23 @@ Evaluasi problem statement yang sudah dibuat menggunakan 5 kriteria.
 
 | Kriteria | Skor (1-5) | Justifikasi |
 |----------|-----------|-------------|
-| Clarity | 5 | Sangat spesifik: mobile, task, dan variabel jelas|
-| Measurability | 5|Semua variabel kuantitatif dan standar UX |
-| Relevance |5 |Sangat penting di health-tech |
-| Testability | 5| Bisa diuji dengan usability testing & eksperimen|
-| Impact | 5|Berdampak pada akses layanan kesehatan digital |
+| Clarity | 5 | Sangat jelas: dua platform spesifik, tugas spesifik (registrasi, verifikasi, bayar), metrik terukur |
+| Measurability | 5 | Semua variabel terukur dengan instrumen standar (SUS, UEQ, waktu, success rate) |
+| Relevance | 5 | Sangat penting untuk peningkatan layanan pajak digital di Indonesia |
+| Testability | 5 | Bisa diuji dengan usability testing, bisa replikasi dengan mahasiswa/responden berbeda |
+| Impact | 5 | Hasilnya bisa jadi rekomendasi perbaikan ke Korlantas dan Bapenda |
 
 **Skor total:** 25 / 25
 
 **Problem statement versi final (1 paragraf):**
 
->Pada era layanan kesehatan digital, efisiensi interaksi pengguna pada platform mobile menjadi faktor krusial dalam keberhasilan akses layanan. Namun, pada mobile website Halodoc, pengguna masih mengalami kesulitan dalam menemukan dokter dan menyelesaikan proses booking. Hal ini ditunjukkan oleh tingginya waktu penyelesaian tugas, rendahnya tingkat keberhasilan booking, serta meningkatnya navigasi ulang oleh pengguna. Permasalahan ini diduga disebabkan oleh tingginya information overload pada tampilan mobile serta struktur navigasi yang kurang intuitif dan minimnya feedback visual selama proses interaksi. Meskipun demikian, belum terdapat studi kuantitatif yang secara spesifik mengukur pengaruh kompleksitas informasi dan desain navigasi terhadap performa pengguna pada konteks mobile health platform. Oleh karena itu, penelitian ini bertujuan untuk menganalisis hubungan antara kompleksitas UI dan kejelasan navigasi terhadap efisiensi dan keberhasilan task pengguna, dengan menggunakan metrik seperti task completion time, task success rate, error rate, serta System Usability Scale (SUS), melalui pendekatan usability testing dan evaluasi heuristik.
-
----
+>Layanan pajak kendaraan digital di Indonesia tersedia dalam dua bentuk: aplikasi nasional (SIGNAL) dan aplikasi daerah (New Sakpole di Jawa Tengah). Meskipun tujuannya sama, pengguna sering melaporkan pengalaman berbeda—SIGNAL dianggap lebih rumit dan membingungkan, sementara New Sakpole dirasa lebih mudah dipahami. Hal ini ditunjukkan oleh perbedaan skor SUS dan banyaknya keluhan di Play Store terkait alur registrasi, verifikasi, dan pembayaran pada SIGNAL. Belum ada studi komparatif yang sistematis mengukur perbedaan usability dan user experience kedua platform pada tugas-tugas kritis menggunakan instrumen evaluasi yang sama. Oleh karena itu, penelitian ini bertujuan untuk melakukan analisis komparatif mendalam terhadap platform SIGNAL dan New Sakpole pada tiga user journey utama (registrasi, verifikasi identitas, pembayaran) dengan menggunakan metrik SUS score, UEQ score, task completion time, task success rate, dan error rate, untuk mengidentifikasi faktor-faktor desain yang berkontribusi pada perbedaan pengalaman pengguna dan memberikan rekomendasi perbaikan berbasis bukti.
 
 ## Refleksi
 
 > Bandingkan "masalah" yang biasa ditemui saat coding (bug, error) dengan masalah riset. Apa perbedaan fundamental dalam cara mendefinisikan dan mendekati keduanya?
 
 **Jawaban:**
-> Masalah pada coding seperti bug atau error biasanya bersifat teknis, jelas terlihat, dan memiliki solusi yang relatif langsung, yaitu memperbaiki kode agar sistem dapat berjalan sesuai fungsi yang diharapkan. Pendekatannya cenderung fokus pada “memperbaiki” (problem-solving) dengan cara mencoba, debugging, dan implementasi solusi yang sudah diketahui.
+>Bug atau error pas coding biasanya langsung terlihat jelas (aplikasi error, fitur tidak jalan). Cara mengatasinya relatif straightforward: cari error log, debug, fix kode, test.
 
-> Sebaliknya, masalah riset tidak selalu terlihat secara langsung dan memerlukan proses identifikasi yang sistematis, mulai dari fenomena, gejala, hingga akar masalah. Masalah riset juga harus dirumuskan secara spesifik, terukur, dan dapat diuji secara ilmiah. Pendekatannya bukan hanya menyelesaikan masalah, tetapi memahami penyebabnya, menguji hipotesis, dan menghasilkan pengetahuan baru yang dapat dibuktikan serta direplikasi.
+>Masalah riset itu beda. Misalnya, warga bilang SIGNAL "susah", tapi "susah" itu artinya apa? Alur rumit? Feedback tidak jelas? Button yang kecil? Perlu digali dulu dengan sistematis—dari gejala, ke akar masalah, terus riset yang terukur. Bukan hanya ngerasa, tapi harus buktikan dengan data dan bisa diulang orang lain dengan hasil mirip.
