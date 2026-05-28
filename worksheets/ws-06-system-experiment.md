@@ -65,58 +65,86 @@ Jika variabel tidak bisa di-map ke komponen apapun → arsitektur perlu didesain
 ## Template A.6 — Mapping RQ ke Arsitektur Sistem
 
 ### Research Question
-**Apakah metode Dynamic Serendipity Adjustment (DSA) menghasilkan skor Unexpectedness yang lebih tinggi tanpa menurunkan F1-Score lebih dari 2% dibandingkan dengan metode Hybrid Recommendation pada dataset e-commerce?**
+**Apakah terdapat perbedaan signifikan pada skor usability (SUS) dan user experience (UEQ) antara SIGNAL dan New Sakpole pada ketiga fase user journey kritis (registrasi, verifikasi identitas, pembayaran)?**
 
 ---
 
 ### Variable → Component Mapping
 
-| Variabel | Tipe | Komponen Sistem | Cara Manipulasi / Pengukuran |
+Catatan: Karena riset ini adalah **comparative usability study** (bukan artifact development), "sistem" yang dimaksud adalah **experimental setup** (testing environment + task protocol) bukan implementasi algoritma baru.
+
+| Variabel | Tipe | Komponen Experimental | Cara Manipulasi / Pengukuran |
 |----------|------|-----------------|------------------------------|
-| **Strategi Pembobotan Serendipity** | IV | **Recommendation Engine Module** — Dual-algorithm: (1) Hybrid Recommendation (static weighting), (2) DSA (real-time adaptation) | Config `recommender_type: ["hybrid" \| "dsa"]`. Swap di runtime via parameter. Weight init dari config file. |
-| **Unexpectedness Score** | DV | **Metrics Collector Module** — Function calculate_unexpectedness() | Query transaction log per session → cross-check user history 90 hari → count unexpected → divide by total. Output: 0.0–1.0. |
-| **F1-Score (Weighted)** | DV | **Metrics Collector Module** — Function calculate_f1_weighted() | Ground truth: rating ≥3.5 = positive. Compute TP/FP/FN per kategori → F1 per kategori → weighted average. |
-| **Kategori Produk** | CV | **Configuration (product_categories.yaml)** | Fixed list: Fashion, Elektronik, Rumah Tangga, dll. Load saat startup. |
-| **Perilaku User (Phase)** | CV | **Phase Detector Module** | Classify dari behavior log: Buying Phase (pending checkout <15 min) vs Browsing Phase (exploratory >5 min). |
+| **Platform Aplikasi** | IV | **Mobile Testing Environment** — Install SIGNAL dan New Sakpole di device terkontrol (Android emulator atau actual phone). Isolasi kedua apps supaya tidak mutual interference. | Switch platform per sesi responden via random assignment. Dokumentasi: app version, OS version, device type tetap sama untuk semua responden (control). |
+| **Fase User Journey** | IV | **Task Protocol Module** — 3 task terstruktur (Registrasi → Verifikasi → Pembayaran) dengan instruksi eksplisit dan scenario kartu. | Standardisasi task: "Daftar akun baru dengan NIK Anda", "Verifikasi dengan foto KTP", "Bayar pajak untuk kendaraan anda". Setiap fase dimulai dari state clean (logout/app restart antar fase). |
+| **Usability Score (SUS)** | DV | **Post-Task Questionnaire Module** — Digital form atau paper-based SUS questionnaire (10 items × Likert 1-5). | Administer SUS setelah setiap fase selesai (atau failed). Scoring formula: (raw_sum - 10) × 2.5 → range 0-100. Auto-compute via spreadsheet atau script. |
+| **User Experience Score (UEQ)** | DV | **Post-Task Questionnaire Module** — Digital form UEQ (26 items × 7-point semantic differential). | Administer setelah semua 3 fase selesai (tidak per-fase, karena UEQ panjang). Scoring per dimensi (Attractiveness, Perspicuity, Efficiency, Dependability, Stimulation, Novelty). |
+| **Task Completion Time** | DV | **System Logger + Stopwatch** — Auto-log timestamp start/end dari task di app (jika API available), fallback: observer manual stopwatch dengan video backup. | Measure duration dari user mulai interact hingga konfirmasi success (atau timeout/fail). Format: detik. Validasi manual via video review jika ada discrepancy. |
+| **Task Success Rate** | DV | **Observer Checklist** — Binary per-phase: sukses (konfirmasi muncul) vs gagal (error/timeout). | Dokumentasi per responden per platform per phase. Hitung: (count success) / (total attempts) × 100%. |
+| **Digital Literacy Level** | CV | **Pre-Experiment Questionnaire** — Self-rated digital literacy (1-5 Likert) atau objective test (e.g., "berapa jam per hari pakai smartphone?"). | Fixed at baseline, tidak dimanipulasi. Gunakan untuk stratification dan sensitivity analysis. |
+| **Perangkat & OS Version** | CV | **Device Specification Config** — Standar device untuk semua responden (e.g., "Samsung Galaxy A12, Android 11" atau "iPhone 11, iOS 15"). | Locked/tidak bervariasi. Jika variation perlu, dokumentasi jelas dan stratifikasi analisis. |
 
 ---
 
 ### 4 Prinsip Desain
 
-✅ **Traceability** — Setiap komponen bisa ditelusuri ke variabel
-- Recommendation Engine ↔ IV
-- Metrics Collector ↔ DV
-- Config Module ↔ CV
+✅ **Traceability** — Setiap komponen percobaan bisa ditelusuri ke variabel
+- Mobile Testing Environment & Task Protocol ↔ IV (platform, phase)
+- Questionnaire Module & System Logger ↔ DV (SUS, UEQ, task metrics)
+- Device Spec & Pre-Exp Questionnaire ↔ CV (digital literacy, device)
 
-✅ **Variable Isolation** — IV bisa diubah tanpa mengubah CV
-- Swap `recommender_type` di config
-- Data, kategori, phase detection tetap sama
+✅ **Variable Isolation** — IV bisa diubah (platform/phase) tanpa mengubah setup lain
+- Instruksi task identik untuk kedua platform
+- SUS dan task metrics diukur identik untuk SIGNAL dan New Sakpole
+- Random assignment responden ke sequence (SIGNAL dulu atau New Sakpole dulu) untuk eliminate order effect
 
-✅ **Measurement Integration** — Pengukuran DV built-in
-- Metrics Collector otomatis compute unexpectedness & F1 per session
-- Output format JSON terstruktur
+✅ **Measurement Integration** — Pengukuran DV standardisasi
+- SUS questionnaire identical template
+- UEQ questionnaire identical template  
+- Task timing metodologi sama (video + stopwatch)
+- Success criteria dokumentasi jelas sebelum eksperimen
 
 ✅ **Reproducibility** — Setup bisa direkonstruksi
-- Config YAML terdokumentasi
-- Version control code + config
-- Dataset snapshot & metadata
+- Task protocol dokumentasi detail di task cards (bukan verbal instruction random)
+- Questionnaire versi digital saved untuk audit trail
+- Video recordings disimpan untuk verification
+- Responden demographics dokumentasi lengkap
 
 ---
 
 ### Experimental Setup
 
-**Input Data:**
-- Dataset e-commerce: user-product interaction log (6 bulan)
-- Size: ≥10K users, ≥100K transactions
-- Format: CSV (user_id, product_id, timestamp, interaction_type, rating, category)
+**Setting:**
+- Lokasi: Controlled lab environment (quiet room, consistent lighting) atau field (kantor pajak, rumah responden dengan observer) — dokumentasi mana pilihan dan justifikasi
 
-**Parameter:**
-- recommender_type: Hybrid | DSA
-- serendipity_weight_hybrid: fixed (e.g., 0.3)
-- serendipity_threshold_dsa: dynamic per phase (buying: 0.1, browsing: 0.5)
-- novelty_lookback_days: 90 (fixed)
-- product_categories: [Fashion, Elektronik, ...] (fixed)
-- phase_threshold_minutes: 15 buying, 5 browsing (fixed)
+**Responden:**
+- Target sample: N≥30 per platform × 3 fase (minimum 90 data points)
+- Stratification: usia <30, 30-55, >55; digital literacy rendah/sedang/tinggi
+- Random assignment: half eksperimen SIGNAL dulu, half New Sakpole dulu (counterbalance order effect)
+
+**Hardware:**
+- Device: Standard phone (e.g., Samsung A series or iPhone 11) — sama untuk semua responden
+- OS: Latest stable version (Android 12+ atau iOS 15+)
+- Internet: Stable WiFi (fixed ISP) atau mobile data (dokumentasi)
+- Screen recording: OBS Studio atau phone built-in recorder untuk capture task behavior
+
+**Task Scenario Cards:**
+```
+PHASE 1: REGISTRASI
+Instruksi: "Buka aplikasi ini. Daftar akun baru menggunakan NIK Anda yang sebenarnya. Catat waktu mulai sekarang. Klik tombol Selesai ketika akun berhasil dibuat."
+Success Criteria: Konfirmasi "Akun Berhasil Dibuat" muncul; responden bisa lihat dashboard home.
+Timeout: 15 menit.
+
+PHASE 2: VERIFIKASI IDENTITAS
+Instruksi: "Lanjutkan dari akun yang sudah dibuat. Ikuti proses verifikasi identitas dengan foto KTP Anda (atau KTP dummy untuk testing). Catat waktu mulai sekarang. Selesai ketika sistem menerima verifikasi."
+Success Criteria: Status menunjukkan "Terverifikasi" atau "Sedang Diproses"; user dapat lanjut ke pembayaran.
+Timeout: 10 menit.
+
+PHASE 3: PEMBAYARAN
+Instruksi: "Lanjutkan pembayaran pajak untuk kendaraan Anda. Pilih metode pembayaran (boleh pilihan dummy/cancel di akhir jika ingin). Catat waktu mulai sekarang. Selesai ketika konfirmasi pembayaran muncul atau transaksi tercatat."
+Success Criteria: Konfirmasi pembayaran atau struk muncul di aplikasi.
+Timeout: 15 menit.
+```
 
 **Output Format:**
 - Per-session JSON: {session_id, recommender_type, unexpectedness_score, f1_weighted, category, user_phase}
