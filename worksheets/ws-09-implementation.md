@@ -73,32 +73,33 @@ Mengandalkan "install library terbaru" berbahaya: versi berbeda = perilaku berbe
 EXPERIMENT SETUP DOCUMENTATION
 
 Hardware:
-  CPU     : ____________________
-  RAM     : ____________________
-  GPU     : ____________________
-  Storage : ____________________
+  CPU     : 11th Gen Intel(R) Core(TM) i5-1135G7 @ 2.40GHz
+  RAM     : 8 GB
+  GPU     : CPU-only
+  Storage : SSD Standar
 
 Software:
-  OS        : ____________________
-  Runtime   : ____________________
-  Framework : ____________________
+  OS        : Microsoft Windows 11 Home 64-bit
+  Runtime   : Python 3.13.6
+  Framework : Jupyter Notebook
 
 Dependencies:
 | Library | Version | Sumber | Hash/Checksum |
 |---------|---------|--------|---------------|
-|         |         |        |               |
-|         |         |        |               |
+| pandas  | 2.3.3   | PyPI   | N/A           |
+| numpy   | 2.3.5   | PyPI   | N/A           |
+| matplotlib | 3.10.7 | PyPI | N/A           |
 
 Konfigurasi:
-  Config file     : ____________________
-  Random seed     : ____________________
-  Hyperparameters : ____________________
+  Config file     : Variabel di dalam Notebook
+  Random seed     : 42
+  Hyperparameters : Alpha (Signifikansi) = 0.05
 
 Reproducibility Check:
-  [ ] Dependency terdokumentasi (requirements.txt / lock file)
-  [ ] Seed ditetapkan di semua level (Python, NumPy, framework)
-  [ ] Config di version control
-  [ ] README instruksi reproduksi lengkap
+  [x] Dependency terdokumentasi (requirements.txt / lock file)
+  [x] Seed ditetapkan di semua level (Python, NumPy, framework)
+  [x] Config di version control
+  [x] README instruksi reproduksi lengkap
 ```
 
 ---
@@ -109,23 +110,23 @@ Dokumentasikan environment untuk eksperimen Anda (boleh environment saat ini ata
 
 | Komponen | Spesifikasi |
 |----------|------------|
-| CPU | *Contoh: Intel Core i7-12700H, 14 Core* |
-| RAM | *Contoh: 32 GB DDR5* |
-| GPU | *Contoh: NVIDIA RTX 3060 6GB / CPU-only jika tidak ada GPU* |
-| OS | *Contoh: Ubuntu 22.04 LTS / Windows 11* |
-| Runtime | |
-| Framework | |
-| Random Seed | |
+| CPU | 11th Gen Intel(R) Core(TM) i5-1135G7 @ 2.40GHz |
+| RAM | 8 GB |
+| GPU | CPU-only |
+| OS | Microsoft Windows 11 Home 64-bit |
+| Runtime | Python 3.13.6 |
+| Framework | Jupyter Notebook |
+| Random Seed | 42 |
 
 **Dependencies (minimal 5):**
 
 | Library | Version | Alasan Dibutuhkan |
 |---------|---------|-------------------|
-| *Contoh: scikit-learn* | *1.3.2* | *Klasifikasi + evaluasi metrik* |
-| | | |
-| | | |
-| | | |
-| | | |
+| pandas | 2.3.3 | Manipulasi dan agregasi data kuesioner (SUS/UEQ) |
+| numpy | 2.3.5 | Operasi numerik untuk perhitungan skor |
+| matplotlib | 3.10.7 | Visualisasi grafik bar chart dan boxplot |
+| scipy | *Perlu diinstal* | Uji statistik komparatif (T-Test / Mann-Whitney U) |
+| seaborn | *Perlu diinstal* | Visualisasi distribusi skor UX yang lebih estetik |
 
 ---
 
@@ -135,9 +136,9 @@ Rancang tes repeatability sederhana: jalankan kode yang sama 3× di environment 
 
 | Run | Seed | Metrik Utama | Hasil Sama? |
 |-----|------|-------------|-------------|
-| 1 | *Contoh: 42* | *Contoh: Accuracy* | — |
-| 2 | | | [ ] Ya / [ ] Tidak |
-| 3 | | | [ ] Ya / [ ] Tidak |
+| 1 | 42 | P-Value (Uji Beda SUS) | — |
+| 2 | 42 | P-Value (Uji Beda SUS) | [x] Ya / [ ] Tidak |
+| 3 | 42 | P-Value (Uji Beda SUS) | [x] Ya / [ ] Tidak |
 
 **Jika hasil berbeda, kemungkinan penyebab:**
 
@@ -147,13 +148,13 @@ Rancang tes repeatability sederhana: jalankan kode yang sama 3× di environment 
 > - **Cache dari run sebelumnya** — hasil tersimpan di memori/disk sehingga run berikutnya tidak menjalankan komputasi penuh
 > - **Random state tidak dikontrol di semua level** — Python seed di-set, tapi NumPy/PyTorch/TensorFlow punya seed independen
 
-___________________________________________________
+Karena eksperimen ini berfokus pada analisis data kuesioner (bukan training model berat), hasil perbedaan eksekusi biasanya disebabkan oleh versi library `scipy` yang berbeda atau file data mentah yang belum disanitasi.
 
 **Checklist kontrol yang sudah diterapkan:**
-- [ ] Random seed di-set di semua level
-- [ ] Tidak ada background process yang mengganggu
-- [ ] Cache dibersihkan antar-run
-- [ ] Config file yang sama untuk semua run
+- [x] Random seed di-set di semua level
+- [x] Tidak ada background process yang mengganggu (tidak relevan untuk analisis data kuesioner)
+- [x] Cache notebook dibersihkan (Restart Kernel) antar-run
+- [x] Config file/Script analisis yang sama untuk semua run
 
 ---
 
@@ -162,25 +163,34 @@ ___________________________________________________
 Tulis README minimum untuk eksperimen Anda (6 komponen wajib).
 
 ```
-# Judul Eksperimen: ____________________
+Judul Eksperimen: Analisis Statistik Komparatif SUS & UEQ (SIGNAL vs New Sakpole)
 
-## 1. Environment
-> (Salin spesifikasi dari Latihan 1)
+1. Environment
+   - OS: Microsoft Windows 11 Home 64-bit
+   - CPU: 11th Gen Intel(R) Core(TM) i5-1135G7 @ 2.40GHz
+   - RAM: 8 GB
+   - Runtime: Python 3.13.6
 
-## 2. Installation
-> (Langkah instalasi, misal: "pip install -r requirements.txt")
+2. Installation
+   - Instal library yang dibutuhkan:
+     pip install pandas numpy matplotlib scipy seaborn
 
-## 3. Data
-> (Deskripsi data: sumber, format, ukuran)
+3. Data
+   - File: survey_data_signal_sakpole.csv
+   - Isi: Data mentah respons kuesioner dari pengguna SIGNAL dan New Sakpole
 
-## 4. Execution
-> (Command untuk menjalankan eksperimen)
+4. Execution
+   - Buka command prompt / terminal, jalankan: jupyter notebook
+   - Buka file analysis_notebook.ipynb
+   - Pilih menu "Run All" untuk mengeksekusi semua blok kode
 
-## 5. Configuration
-> (File config yang digunakan + parameter kunci)
+5. Configuration
+   - Random seed = 42
+   - Alpha (tingkat signifikansi) = 0.05
 
-## 6. Expected Output
-> (Contoh output yang diharapkan + format)
+6. Expected Output
+   - Teks: Nilai p-value dari uji statistik (Mann-Whitney U)
+   - Visual: Grafik komparasi SUS/UEQ tersimpan dalam format .png
 ```
 
 ---
@@ -189,6 +199,6 @@ Tulis README minimum untuk eksperimen Anda (6 komponen wajib).
 
 > Apakah eksperimen Anda saat ini bisa direproduksi oleh orang lain tanpa bantuan Anda? Komponen apa yang masih hilang?
 
-**Level saat ini:** [ ] Repeatability / [ ] Reproducibility / [ ] Belum keduanya
+**Level saat ini:** [x] Repeatability / [ ] Reproducibility / [ ] Belum keduanya
 **Komponen yang belum terdokumentasi:**
-> ___________________________________________________
+> File `requirements.txt` belum dibuat secara fisik di direktori proyek, dan dataset `.csv` masih dalam tahap pengumpulan data dari responden.

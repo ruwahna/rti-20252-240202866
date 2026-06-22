@@ -65,28 +65,28 @@ Run gagal/anomali tidak boleh dihapus tanpa dokumentasi. Bisa jadi:
 
 ## Template A.10 — Execution Plan & Data Log
 
-```
-EXECUTION PLAN
+### 1. Execution Plan
 
-| Run # | Skenario | Seed | Parameter | Status | Waktu | Output File |
-|-------|----------|------|-----------|--------|-------|-------------|
-| 1     |          |      |           |        |       |             |
-| 2     |          |      |           |        |       |             |
-| 3     |          |      |           |        |       |             |
-| ...   |          |      |           |        |       |             |
+| Run # | Skenario | Seed | Parameter | Status | Waktu Eksekusi | Output File |
+|---|---|---|---|---|---|---|
+| **1** | Uji Normalitas (Shapiro-Wilk) | 42 | Alpha = 0.05 | Planned | *TBD* | `shapiro_out.txt` |
+| **2** | Uji Beda SUS (Mann-Whitney U) | 42 | Alpha = 0.05 | Planned | *TBD* | `mwu_sus_out.txt` |
+| **3** | Uji Beda UEQ per dimensi | 42 | Alpha = 0.05 | Planned | *TBD* | `mwu_ueq_out.txt` |
+| **4** | Bootstrapping SUS (Iterasi 1) | 123 | n = 1000 | Planned | *TBD* | `boot_123.csv` |
+| **5** | Bootstrapping SUS (Iterasi 2) | 456 | n = 1000 | Planned | *TBD* | `boot_456.csv` |
 
-Jumlah runs per skenario : ____
-Total runs               : ____
+- **Jumlah runs per skenario:** 1 (untuk uji dasar), 2 (untuk bootstrapping)
+- **Total runs:** 5
 
-DATA LOG (per run):
-  Run ID    : ____________________
-  Timestamp : ____________________
-  Skenario  : ____________________
-  Input     : ____________________
-  Output    : ____________________
-  Anomali   : ____________________
-  Catatan   : ____________________
-```
+### 2. Data Log (Hasil Eksekusi)
+
+- **Run ID:** `run-sus-mannwhitney-01`
+- **Timestamp:** `2026-06-22T21:55:10`
+- **Skenario:** Uji Beda SUS SIGNAL vs New Sakpole
+- **Input:** `survey_data_signal_sakpole.csv` (N=100 sampel)
+- **Output:** `p_value_sus.txt` (p=0.014) & `sus_boxplot.png`
+- **Anomali:** Data skor SUS tidak berdistribusi normal berdasarkan uji Shapiro-Wilk (p = 0.031).
+- **Catatan:** Karena anomali data yang tidak normal tersebut, uji beda dialihkan menggunakan metode Non-parametrik (Mann-Whitney U). Hasil uji beda menunjukkan p-value < 0.05, sehingga terbukti ada perbedaan usability yang signifikan antara SIGNAL dan New Sakpole.
 
 ---
 
@@ -96,15 +96,15 @@ Susun execution plan untuk eksperimen Anda. Tentukan skenario, jumlah run, dan s
 
 | Run # | Skenario | Seed | Parameter Kunci | Status |
 |-------|----------|------|----------------|--------|
-| *1* | *Contoh: BERT-base, DS-1* | *42* | *lr=2e-5, epoch=10* | *Planned* |
-| *2* | *BERT-base, DS-1* | *123* | *lr=2e-5, epoch=10* | *Planned* |
-| 3 | | | | |
-| 4 | | | | |
-| 5 | | | | |
+| 1 | Uji Normalitas (Shapiro-Wilk) | 42 | Alpha = 0.05 | Planned |
+| 2 | Uji Beda SUS (Mann-Whitney U) | 42 | Alpha = 0.05 | Planned |
+| 3 | Uji Beda UEQ per dimensi | 42 | Alpha = 0.05 | Planned |
+| 4 | Bootstrapping SUS 1000 iterasi | 123 | n=1000, seed=123 | Planned |
+| 5 | Bootstrapping SUS 1000 iterasi | 456 | n=1000, seed=456 | Planned |
 
-**Total skenario:** ____
-**Run per skenario:** ____
-**Total run keseluruhan:** ____
+**Total skenario:** 3 Skenario Uji Dasar + 1 Skenario Bootstrapping
+**Run per skenario:** 1x untuk uji dasar, 2x (beda seed) untuk bootstrapping
+**Total run keseluruhan:** 5 run utama
 
 ---
 
@@ -115,25 +115,25 @@ Desain format data log untuk eksperimen Anda. Tentukan field apa saja yang akan 
 **Identitas:**
 | Field | Contoh |
 |-------|--------|
-| Run ID | *run-001* |
-| Timestamp | *2025-03-15T10:30:00* |
-| | |
+| Run ID | run-sus-mannwhitney-01 |
+| Timestamp | 2026-06-25T14:30:00 |
+| Skenario | Uji Beda SUS SIGNAL vs New Sakpole |
 
 **Konfigurasi:**
 | Field | Contoh |
 |-------|--------|
-| Seed | *42* |
-| Code version | *commit abc1234* |
-| | |
+| Seed | 42 |
+| Alpha | 0.05 |
+| Dataset Version | raw_data_v1.csv |
 
 **Hasil:**
 | Metrik | Tipe Data | Range Valid |
 |--------|----------|-------------|
-| *Contoh: Accuracy* | *float* | *0.0 – 1.0* |
-| | | |
-| | | |
+| P-Value | float | 0.0 – 1.0 |
+| Z-Score | float | -10.0 – 10.0 |
+| Kesimpulan | string | "Signifikan" / "Tidak Signifikan" |
 
-**Format output:** [ ] CSV / [ ] JSON / [ ] Database / [ ] Lainnya: ____
+**Format output:** [x] CSV / [ ] JSON / [ ] Database / [ ] Lainnya: ____
 
 ---
 
@@ -143,10 +143,10 @@ Rencanakan bagaimana menangani anomali. Untuk setiap jenis, tentukan langkah yan
 
 | Jenis Anomali | Contoh | Tindakan |
 |---------------|--------|----------|
-| Run gagal (crash) | *Contoh: OOM pada batch_size=64* | *Contoh: Dokumentasi, re-run batch_size=32, catat perubahan* |
-| Hasil ekstrem | | |
-| Waktu eksekusi anomali | | |
-| Inkonsistensi dengan run lain | | |
+| Run gagal (crash) | Error TypeError saat load CSV (misal: ada sel kosong) | Dokumentasi error, sanitasi data dengan fungsi fillna() atau dropna(), lalu re-run |
+| Hasil ekstrem | Skor SUS mentah responden > 100 atau < 0 (mustahil) | Jangan langsung hapus! Cek apakah itu kesalahan ketik responden, filter rentang valid secara eksplisit di code |
+| Asumsi uji tidak terpenuhi | P-value uji normalitas Shapiro-Wilk < 0.05 (data tidak berdistribusi normal) | Jangan dipaksakan. Ubah uji parametrik (T-Test) menjadi Non-parametrik (Mann-Whitney U), dan catat alasannya |
+| Inkonsistensi antar run | Hasil Bootstrapping seed 123 signfikan, tapi seed 456 tidak signifikan | Naikkan jumlah iterasi bootstrapping (misal dari 1000 ke 10000) agar konvergen/stabil, lalu re-run |
 
 **Prinsip:** Detect → Investigate → Document → Decide
 
@@ -157,6 +157,6 @@ Rencanakan bagaimana menangani anomali. Untuk setiap jenis, tentukan langkah yan
 > Pernahkah Anda melaporkan hasil riset/tugas dari single run? Apa risikonya? Bagaimana multiple run mengubah kepercayaan terhadap hasil?
 
 **Pengalaman sebelumnya:**
-> ___________________________________________________
+> Dulu sering mengambil kesimpulan hanya dari satu kali uji statistik. Jika hasilnya tidak sesuai ekspektasi (misal p > 0.05), data yang dianggap "jelek" kadang dihapus tanpa dokumentasi atau alasan statistik yang kuat (*p-hacking*).
 **Yang akan dilakukan berbeda:**
-> ___________________________________________________
+> Sekarang setiap proses (mulai dari pembersihan data kosong, pengujian normalitas, hingga hasil p-value) akan dicatat log-nya. Jika terjadi anomali (misal data tidak normal), anomali tersebut akan diselesaikan sesuai protokol (ganti ke uji non-parametrik) dan didokumentasikan, bukan dibuang secara diam-diam.

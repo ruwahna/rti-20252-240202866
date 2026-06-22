@@ -81,32 +81,30 @@ Metrik-X     ✗      ✗       ✓ ←     ✗        ✗
 
 ## Template A.15 — Paper Structure Checklist
 
-```
-PAPER STRUCTURE CHECKLIST
+**PAPER STRUCTURE CHECKLIST**
 
-Title   : ____________________
-Target  : [ ] Jurnal  [ ] Konferensi  [ ] Laporan
+**Title   :** Analisis Komparatif Usability Aplikasi SIGNAL dan New Sakpole Menggunakan System Usability Scale (SUS)
+**Target  :** [ ] Jurnal  [x] Konferensi  [ ] Laporan
 
-Section Check:
-  [ ] Abstract — masalah, metode, hasil utama, kontribusi (max 250 kata)
-  [ ] Introduction — konteks → gap → RQ → kontribusi → struktur paper
-  [ ] Related Work — concept-centric, gap positioning
-  [ ] Method — reproducible: desain, variabel, metrik, setup, prosedur
-  [ ] Results — tabel + grafik + observasi (tanpa interpretasi)
-  [ ] Discussion — interpretasi, perbandingan, implikasi, limitation
-  [ ] Conclusion — jawaban RQ, kontribusi, future work
+**Section Check:**
+- [x] Abstract — masalah, metode, hasil utama, kontribusi (max 250 kata)
+- [x] Introduction — konteks → gap → RQ → kontribusi → struktur paper
+- [x] Related Work — concept-centric, gap positioning
+- [x] Method — reproducible: desain, variabel, metrik, setup, prosedur
+- [x] Results — tabel + grafik + observasi (tanpa interpretasi)
+- [x] Discussion — interpretasi, perbandingan, implikasi, limitation
+- [x] Conclusion — jawaban RQ, kontribusi, future work
 
-Consistency Matrix:
-  [ ] RQ di Introduction = RQ di Method = RQ di Conclusion
-  [ ] Variabel di Method = variabel di Results
-  [ ] Klaim di Discussion didukung data di Results
-  [ ] Limitasi di Discussion di-address di Conclusion/Future Work
+**Consistency Matrix:**
+- [x] RQ di Introduction = RQ di Method = RQ di Conclusion
+- [x] Variabel di Method = variabel di Results
+- [x] Klaim di Discussion didukung data di Results
+- [x] Limitasi di Discussion di-address di Conclusion/Future Work
 
-Writing Quality:
-  [ ] Clarity — mudah dipahami tanpa re-read
-  [ ] Precision — tidak ada istilah ambigu
-  [ ] Conciseness — tidak ada kalimat redundan
-```
+**Writing Quality:**
+- [x] Clarity — mudah dipahami tanpa re-read
+- [x] Precision — tidak ada istilah ambigu
+- [x] Conciseness — tidak ada kalimat redundan
 
 ---
 
@@ -116,13 +114,13 @@ Buat outline paper untuk riset Anda menggunakan struktur IMRAD.
 
 | Section | Konten Utama (2-3 kalimat) | Target Kata |
 |---------|---------------------------|------------|
-| Abstract | *Contoh: Sistem rekomendasi memiliki akurasi tinggi tapi satisfaction rendah. Studi ini menguji CF+context signal. Hasil: satisfaction naik 38% tanpa penurunan RMSE signifikan.* | 200-250 |
-| Introduction | *Contoh: Konteks: gap antara akurasi dan kepuasan pengguna. Gap: tidak ada studi yang mengkombinasikan CF+context. RQ: apakah CF+context meningkatkan satisfaction?* | 500-700 |
-| Related Work | | 700-1000 |
-| Method | | 800-1200 |
-| Results | | 500-800 |
-| Discussion | | 600-900 |
-| Conclusion | | 200-400 |
+| Abstract | Aplikasi e-Samsat seringkali memiliki tingkat usability yang beragam sehingga mempengaruhi kepuasan masyarakat. Studi ini membandingkan skor *System Usability Scale* (SUS) antara SIGNAL dan New Sakpole dengan 194 responden. Hasil uji *T-Test* menunjukkan SIGNAL memiliki skor signifikan lebih tinggi (76.90 vs 67.16), memberikan panduan empiris penting untuk desain layanan publik. | 200-250 |
+| Introduction | Konteks: Adopsi layanan e-government yang terhambat akibat sulitnya penggunaan antarmuka aplikasi. Gap: Belum banyak evaluasi komparatif empiris antara aplikasi e-Samsat nasional (SIGNAL) dengan provinsi (Sakpole). RQ: Apakah terdapat perbedaan signifikan pada *usability* antara kedua sistem? | 500-700 |
+| Related Work | Tinjauan literatur tentang standar evaluasi *usability* menggunakan skor SUS (ambang batas 68). Serta, merangkum tantangan UX pada ranah aplikasi *e-government* di Indonesia. | 700-1000 |
+| Method | Menggunakan pendekatan kuantitatif komparatif. Metrik: Skor SUS. Dataset dikumpulkan dari kuesioner pada pengguna aktif. Proses validasi data dan *cleaning* memastikan *outlier* dibuang untuk analisis statistik T-Test. | 800-1200 |
+| Results | Laporan objektif data deskriptif: rata-rata SIGNAL 76.90 ± 12.79, Sakpole 67.16 ± 12.03. Disajikan dalam tabel dan diagram *bar chart* dengan *error bar*. Uji hipotesis menghasilkan p < 0.001 dan Cohen's d = 0.78. | 500-800 |
+| Discussion | Menjelaskan bahwa perombakan UI pada SIGNAL terbukti sukses melampaui batas standar kelayakan SUS (score > 68), sedangkan Sakpole di bawah standar. Perbedaan memiliki *practical significance* tinggi (d=0.78). Menjelaskan juga limitasi demografi sampel penelitian. | 600-900 |
+| Conclusion | SIGNAL secara sah terbukti memiliki tingkat *usability* lebih baik daripada New Sakpole. Saran untuk pemerintah provinsi adalah melakukan audit ulang desain UX Sakpole. Rekomendasi riset mendatang: menambah wawancara kualitatif agar tahu penyebab persisnya. | 200-400 |
 
 ---
 
@@ -130,24 +128,21 @@ Buat outline paper untuk riset Anda menggunakan struktur IMRAD.
 
 Buat consistency matrix untuk memverifikasi internal consistency paper Anda.
 
-|  | Intro | Method | Result | Discussion | Conclusion |
-|--|-------|--------|--------|-----------|-----------|
-| *Contoh: RQ1* | *✓* | *✓* | *✓* | *✓* | *✓* |
-| *Contoh: Metrik-X* | *✗ ←* | *✗ ←* | *✓* | *✗ ←* | *✗ ←* |
-| RQ1 | | | | | |
-| RQ2 | | | | | |
-| Metrik utama | | | | | |
-| Variabel IV | | | | | |
-| Variabel DV | | | | | |
-| Klaim/kontribusi | | | | | |
+| Elemen | Intro | Method | Result | Discussion | Conclusion |
+|--------|-------|--------|--------|-----------|-----------|
+| RQ Utama (Beda Usability) | ✓ | ✓ | ✓ | ✓ | ✓ |
+| Metrik Utama (Skor SUS) | ✓ | ✓ | ✓ | ✓ | ✓ |
+| Analisis T-Test | ✗ | ✓ | ✓ | ✓ | ✗ |
+| Temuan (SIGNAL lebih baik) | ✗ | ✗ | ✓ | ✓ | ✓ |
+| Limitasi Riset | ✗ | ✗ | ✗ | ✓ | ✓ |
 
 **Isi setiap sel:** ✓ (ada & konsisten), ✗ (missing), ~ (ada tapi inkonsisten)
 
 **Inkonsistensi yang ditemukan:**
-> ___________________________________________________
+> Secara umum alur sudah konsisten. Namun, terkadang alat uji statistik detail (seperti T-Test) sering absen di bab *Conclusion* atau *Intro*, hal ini lumrah karena bab tersebut fokus pada "makna/konsep" alih-alih metode mekanis.
 
 **Tindakan perbaikan:**
-> ___________________________________________________
+> Tetap memastikan bahwa di *Intro* dan *Conclusion*, penekanan ada pada variabel penelitian ("membandingkan skor *usability*"), sementara penjelasan alat statistik spesifik ("*Independent T-test*") hanya difokuskan pada *Method* dan *Results*.
 
 ---
 
@@ -156,16 +151,16 @@ Buat consistency matrix untuk memverifikasi internal consistency paper Anda.
 Ambil satu paragraf dari tulisan Anda (atau tulis paragraf baru) dan evaluasi kualitasnya.
 
 **Paragraf asli:**
-> (tempel paragraf Anda di sini)
+> Berdasarkan hasil yang kita peroleh di lapangan setelah menghitung kuesioner dari banyak orang, performa dari aplikasi SIGNAL kelihatan cukup bagus dan grafiknya naik. Kalau dibandingkan sama Sakpole, nilai Sakpole terlihat lebih kecil. Jadi aplikasi SIGNAL terbukti lebih mantap dipakai buat masyarakat.
 
 | Kriteria | Evaluasi | Perbaikan |
 |----------|---------|-----------|
-| Clarity | *Contoh: kalimat ke-3 ambigu — "performa" bisa berarti accuracy atau speed* | *Ubah menjadi: "accuracy meningkat..."* |
-| Precision | | |
-| Conciseness | | |
+| Clarity | Gaya bahasanya terlalu informal dan kata-katanya bertele-tele ("hasil yang kita peroleh", "grafiknya naik"). | Gunakan struktur kalimat pasif / objektif akademis. |
+| Precision | Sangat tidak presisi. "Performa cukup bagus", "banyak orang", "nilai lebih kecil", "lebih mantap" adalah klaim tak terukur. | Ganti dengan metrik absolut: "n=194", "skor SUS", "signifikan (p<0.001)". |
+| Conciseness | Memakai banyak kata *filler* yang tidak menambah informasi penting sama sekali. | Persingkat dan sampaikan langsung *to the point*. |
 
 **Paragraf setelah perbaikan:**
-> (tulis paragraf yang sudah diperbaiki)
+> Evaluasi terhadap 194 responden menunjukkan bahwa rata-rata skor SUS pada aplikasi SIGNAL (M=76.90, SD=12.79) secara signifikan lebih tinggi dibandingkan aplikasi New Sakpole (M=67.16, SD=12.03), dengan nilai *p* < 0.001. Besaran efek (*effect size*) yang dihasilkan adalah Cohen's d = 0.78, mengindikasikan bahwa perbedaan *usability* kedua sistem tidak hanya signifikan secara statistik, tetapi juga memberikan dampak praktis yang substansial bagi pengalaman pengguna akhir.
 
 ---
 
@@ -173,5 +168,6 @@ Ambil satu paragraf dari tulisan Anda (atau tulis paragraf baru) dan evaluasi ku
 
 > Apa perbedaan antara menulis "tentang" riset dan menulis sebagai "argumen" riset? Bagaimana urutan penulisan (Method → Discussion → Introduction) mengubah kualitas tulisan?
 
-> ___________________________________________________
-> ___________________________________________________
+> Menulis *tentang* riset seringkali menyerupai laporan kronologis harian layaknya diari ("pertama saya sebar kuesioner, lalu saya hitung, dan ini nilainya"). Sebaliknya, menulis sebagai *argumen* riset artinya kita menyusun narasi layaknya seorang pengacara: meyakinkan pembaca mengapa masalah ini krusial, menunjukkan metodologi yang kuat sebagai alat bukti, dan menyajikan hasil yang menjawab langsung permasalahan utama.
+> 
+> Mengubah urutan menulis menjadi mulai dari *Method* dan *Results* terlebih dahulu akan menjangkar (*anchor*) klaim kita pada fakta lapangan yang tak terbantahkan. Saat kemudian kita menulis *Introduction* di tahap akhir, kita dapat menyelaraskan narasi pembuka agar relevan dan langsung menjurus pada temuan aktual yang sudah terbukti, menghindarkan kita dari membuat klaim muluk-muluk di awal *paper* yang ternyata tidak didukung oleh data.

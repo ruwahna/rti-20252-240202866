@@ -63,37 +63,37 @@ Data leakage terjadi ketika informasi dari test set "bocor" ke preprocessing:
 
 ## Template A.13 — Preprocessing Documentation Log
 
-```
-PREPROCESSING LOG
+**PREPROCESSING LOG**
 
-Dataset           : ____________________
-Jumlah data awal  : ____________________
+**Dataset           :** `survey_data_signal_sakpole.csv`
+**Jumlah data awal  :** 200 baris (records)
 
-Cleaning:
+**Cleaning:**
+
 | Masalah | Jumlah Kasus | Penanganan | Justifikasi |
 |---------|-------------|------------|-------------|
-| Missing |             |            |             |
-| Duplikat|             |            |             |
-| Error   |             |            |             |
+| Missing | 5           | Listwise deletion (Drop baris) | Missing rate < 5% (2.5%), diasumsikan random (user tutup browser). |
+| Duplikat| 0           | -          | Tidak ada data duplikat yang terdeteksi. |
+| Error   | 1           | Drop baris | Skor SUS > 100 tidak masuk akal secara teori, ini pasti error input / typo responden. |
 
-Transformation:
+**Transformation:**
+
 | Transformasi | Variabel | Detail | Alasan |
 |-------------|----------|--------|--------|
-|             |          |        |        |
+| Tidak ada   | -        | -      | Data SUS sudah numerik dan tidak butuh transformasi khusus untuk analisis *mean comparison*. |
 
-Normalization:
-  Metode    : ____________________
-  Alasan    : ____________________
-  Parameter : (dihitung dari: training set / seluruh data)
+**Normalization:**
+- **Metode    :** Tidak dilakukan
+- **Alasan    :** Skor SUS sudah memiliki standar *bounded range* (0 sampai 100), sehingga analisis statistik dasar (seperti T-test atau ANOVA) bisa langsung diaplikasikan tanpa perlu normalisasi.
+- **Parameter :** -
 
-Leakage Check:
-  [ ] Parameter normalisasi dari training set saja
-  [ ] Tidak ada informasi test set dalam preprocessing
-  [ ] Cross-validation dilakukan setelah split
+**Leakage Check:**
+- [x] Parameter normalisasi dari training set saja (N/A)
+- [x] Tidak ada informasi test set dalam preprocessing (N/A)
+- [x] Cross-validation dilakukan setelah split (N/A)
 
-Jumlah data akhir : ____________________
-Script tersedia   : [ ] Ya → path: ____ | [ ] Belum
-```
+**Jumlah data akhir :** 194 baris
+**Script tersedia   :** [x] Ya → path: `data_validation/check_data.py` | [ ] Belum
 
 ---
 
@@ -103,14 +103,12 @@ Periksa dataset Anda (atau dataset contoh) dan dokumentasikan masalah yang ditem
 
 | Masalah | Jumlah Kasus | Penanganan | Justifikasi |
 |---------|-------------|------------|-------------|
-| *Contoh: Missing di kolom "label"* | *12 dari 500 (2.4%)* | *Listwise deletion* | *< 5%, distribusi random (MCAR)* |
-| | | | |
-| | | | |
-| | | | |
+| Missing values pada skor SUS | 5 dari 200 (2.5%) | Listwise deletion (menghapus baris) | Persentase missing < 5%, distribusi dianggap random, tidak signifikan merusak variabilitas. |
+| Error / Outlier skor SUS > 100 | 1 dari 200 (0.5%) | Menghapus baris | Skor SUS maksimal secara absolut adalah 100. Data ini cacat secara logika. |
 
-**Jumlah data sebelum cleaning:** ____
-**Jumlah data setelah cleaning:** ____
-**Persentase data yang hilang/berubah:** ____%
+**Jumlah data sebelum cleaning:** 200
+**Jumlah data setelah cleaning:** 194
+**Persentase data yang hilang/berubah:** 3%
 
 ---
 
@@ -120,16 +118,15 @@ Tentukan apakah data Anda perlu normalisasi, dan jika ya, metode apa yang tepat.
 
 | Variabel | Range Asli | Distribusi | Outlier? | Metode Normalisasi | Alasan |
 |----------|-----------|-----------|----------|-------------------|--------|
-| *Contoh: response_time* | *0.1 – 45.2s* | *Right-skewed* | *Ya (45.2s)* | *Robust scaling* | *Ada outlier, perlu robust* || *Contoh: accuracy_score* | *0.72 – 0.95* | *Normal, narrow* | *Tidak* | *Tidak perlu* | *Sudah dalam [0,1], metode berbasis distance tidak digunakan* || | | | | | |
-| | | | | | |
+| SUS_Score | 0 – 100 | Asumsi normal | Sudah dibersihkan | Tidak perlu | Sudah berada di dalam skala standar 0-100 yang konsisten. Tidak perlu menggunakan algoritma berbasis distance yang butuh range [0,1]. |
 
-**Apakah normalisasi diperlukan?** [ ] Ya / [ ] Tidak
+**Apakah normalisasi diperlukan?** [ ] Ya / [x] Tidak
 **Justifikasi:**
-> ___________________________________________________
+> Data penelitian ini berfokus pada analisis perbandingan *mean* skor System Usability Scale (SUS) antar aplikasi. Karena SUS sudah merupakan metrik dengan *range* paten 0-100, melakukan normalisasi (seperti Z-score atau Min-Max) justru akan menghilangkan interpretabilitas bisnis dari skor itu sendiri (misalnya, batas skor 68 sebagai skor wajar).
 
 **Leakage check:**
-- [ ] Parameter dihitung dari training set saja
-- [ ] Normalisasi diterapkan setelah train-test split
+- [x] Parameter dihitung dari training set saja (N/A)
+- [x] Normalisasi diterapkan setelah train-test split (N/A)
 
 ---
 
@@ -137,20 +134,18 @@ Tentukan apakah data Anda perlu normalisasi, dan jika ya, metode apa yang tepat.
 
 Buat ringkasan preprocessing lengkap — dokumentasi yang cukup bagi orang lain untuk mereplikasi.
 
-```
-PREPROCESSING SUMMARY
+**PREPROCESSING SUMMARY**
 
-1. Dataset: ____________________
-2. Data awal: ____ records, ____ features
+1. Dataset: `survey_data_signal_sakpole.csv`
+2. Data awal: 200 records, 11 features
 3. Cleaning:
-   - Missing values: ____ kasus, metode: ____
-   - Duplikat: ____ kasus, tindakan: ____
-   - Error: ____ kasus, tindakan: ____
-4. Transformation: ____________________
-5. Normalisasi: ____ (metode), parameter dari ____
-6. Data akhir: ____ records, ____ features
-7. Leakage check: [ ] Lulus / [ ] Ada masalah
-```
+   - Missing values: 5 kasus, metode: Listwise deletion (drop)
+   - Duplikat: 0 kasus, tindakan: -
+   - Error: 1 kasus (SUS > 100), tindakan: Dihapus
+4. Transformation: Tidak ada transformasi variabel (data original dipertahankan).
+5. Normalisasi: Tidak dilakukan, parameter dari N/A (skor SUS langsung digunakan).
+6. Data akhir: 194 records, 11 features
+7. Leakage check: [x] Lulus / [ ] Ada masalah (Tidak rentan leakage karena bukan pemodelan prediktif)
 
 ---
 
@@ -158,5 +153,4 @@ PREPROCESSING SUMMARY
 
 > Apakah Anda pernah melakukan normalisasi "karena biasa dilakukan" tanpa mempertimbangkan apakah benar-benar diperlukan? Apa risiko over-preprocessing?
 
-> ___________________________________________________
-> ___________________________________________________
+> Ya, seringkali di tutorial Machine Learning diajarkan untuk mem-fit StandardScaler (Z-score) pada semua kolom numerik tanpa berpikir panjang. Risiko *over-preprocessing* adalah hilangnya makna atau konteks asli dari data (interpretabilitas). Misalnya, mengubah skor SUS 75 menjadi nilai z-score 0.4 membuat kita sulit menjelaskan hasilnya secara intuitif, karena nilai patokan "baik/buruk" pada kuesioner SUS menjadi hilang.

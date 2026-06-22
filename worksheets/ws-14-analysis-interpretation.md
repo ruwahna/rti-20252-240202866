@@ -74,39 +74,41 @@ Hipotesis yang ditolak adalah **temuan yang berharga**:
 
 ## Template A.14 — Analysis & Interpretation Report
 
-```
-ANALYSIS & INTERPRETATION
+**ANALYSIS & INTERPRETATION**
 
-1. Statistik Deskriptif:
-   | Skenario | Mean | Std | Median | Min | Max | n |
-   |----------|------|-----|--------|-----|-----|---|
-   |          |      |     |        |     |     |   |
+**1. Statistik Deskriptif:**
 
-2. Uji Hipotesis:
-   Uji yang digunakan  : ____________________
-   Justifikasi          : ____________________
-   Hasil: p = ____, effect size (d/r/η²) = ____
-   CI 95%               : [____, ____]
+| Skenario    | Mean  | Std   | n  |
+|-------------|-------|-------|----|
+| SIGNAL      | 76.90 | 12.79 | 97 |
+| New Sakpole | 67.16 | 12.03 | 97 |
 
-3. Keputusan:
-   [ ] H₀ ditolak → H₁ diterima
-   [ ] H₀ tidak ditolak
+**2. Uji Hipotesis:**
+- **Uji yang digunakan  :** Independent T-Test
+- **Justifikasi         :** Membandingkan nilai rata-rata (mean) dari 2 grup/kelompok data numerik yang saling bebas (independent) dan n > 30.
+- **Hasil               :** p-value < 0.001, effect size (Cohen's d) = 0.78
+- **CI 95%              :** Perbedaan ~9.74 poin (Interval tidak memotong nol)
 
-4. Interpretasi:
-   Hubungan ke RQ       : ____________________
-   Practical significance: ____________________
-   Perbandingan literatur: ____________________
+**3. Keputusan:**
+- [x] H₀ ditolak → H₁ diterima (Terdapat perbedaan signifikan)
+- [ ] H₀ tidak ditolak
 
-5. Limitation:
-   | Jenis | Ancaman | Dampak | Mitigasi |
-   |-------|---------|--------|----------|
-   |       |         |        |          |
+**4. Interpretasi:**
+- **Hubungan ke RQ       :** Menjawab Research Question bahwa aplikasi SIGNAL terbukti memiliki tingkat usability (skor SUS) yang secara signifikan lebih tinggi dibandingkan New Sakpole.
+- **Practical significance:** Perbedaan rata-rata skor sebesar nyaris 10 poin dengan effect size kategori *Large* (0.78) menunjukkan bahwa secara praktis di dunia nyata, perbedaannya benar-benar dapat dirasakan langsung oleh end-user.
+- **Perbandingan literatur:** Berdasarkan literatur, batas kelayakan skor SUS adalah 68. New Sakpole (67.16) berada di bawah standar kelayakan minimum industri, sedangkan SIGNAL (76.90) berhasil masuk ke dalam kategori "Good / Acceptable".
 
-6. Failure Analysis (jika H₀ tidak ditolak):
-   Penyebab potensial  : ____________________
-   Boundary condition   : ____________________
-   Insight              : ____________________
-```
+**5. Limitation:**
+
+| Jenis                | Ancaman                             | Dampak                               | Mitigasi                              |
+|----------------------|-------------------------------------|--------------------------------------|---------------------------------------|
+| Statistical validity | Asumsi normalitas mungkin meleset   | Mengurangi ketepatan estimasi p-value| Menggunakan uji non-parametrik (Wilcoxon/Mann-Whitney) jika data terbukti sangat skew. |
+| External validity    | Responden mungkin terpusat di 1 demografi | Kesimpulan sulit digeneralisasi | Menyajikan batasan demografi secara transparan pada kesimpulan riset. |
+
+**6. Failure Analysis (jika H₀ tidak ditolak):**
+- **Penyebab potensial  :** N/A (H₀ berhasil ditolak)
+- **Boundary condition  :** N/A
+- **Insight             :** N/A
 
 ---
 
@@ -116,13 +118,13 @@ Tentukan uji statistik yang tepat untuk eksperimen Anda.
 
 | Pertanyaan | Jawaban |
 |-----------|---------|
-| Berapa grup yang dibandingkan? | *Contoh: 3 (BERT, LSTM, SVM)* |
-| Apakah data berpasangan (paired)? | |
-| Apakah distribusi normal? (uji normalitas) | |
-| **Uji yang dipilih:** | |
-| **Justifikasi:** | |
+| Berapa grup yang dibandingkan? | 2 Grup (SIGNAL dan New Sakpole) |
+| Apakah data berpasangan (paired)? | Tidak (Independent) |
+| Apakah distribusi normal? (uji normalitas) | Ya (Berdasarkan Central Limit Theorem, n=97 > 30) |
+| **Uji yang dipilih:** | Independent T-Test |
+| **Justifikasi:** | T-test independen adalah standar emas di literatur untuk membandingkan rata-rata skor dari dua kelompok yang saling bebas dengan sampel yang cukup besar. |
 
-**Effect size yang akan dilaporkan:** [ ] Cohen's d / [ ] Eta-squared / [ ] Lainnya: ____
+**Effect size yang akan dilaporkan:** [x] Cohen's d / [ ] Eta-squared / [ ] Lainnya: ____
 
 ---
 
@@ -130,21 +132,21 @@ Tentukan uji statistik yang tepat untuk eksperimen Anda.
 
 Gunakan data berikut (atau data riil Anda) untuk berlatih interpretasi.
 
-**Data:**
-| Model | Accuracy (mean ± std) | n |
-|-------|----------------------|---|
-| A | 89.2 ± 1.5 | 10 |
-| B | 87.8 ± 2.1 | 10 |
+**Data Riil:**
+| Model       | SUS Score (mean ± std) | n  |
+|-------------|------------------------|----|
+| SIGNAL      | 76.90 ± 12.79          | 97 |
+| New Sakpole | 67.16 ± 12.03          | 97 |
 
-p = 0.045, Cohen's d = 0.74, CI 95% = [0.03, 2.77]
+p < 0.001, Cohen's d = 0.78
 
 | Aspek | Interpretasi |
 |-------|-------------|
-| Signifikansi statistik | *Contoh: p < 0.05 → signifikan pada α=0.05* |
-| Effect size | *Contoh: d=0.74 → medium-to-large effect* |
-| Practical significance | |
-| Hubungan ke RQ | |
-| Perbandingan literatur | |
+| Signifikansi statistik | p-value < 0.001 (jauh di bawah ambang batas α=0.05), artinya perbedaan skor antara kedua kelompok sangat signifikan secara statistik (bukan karena kebetulan). |
+| Effect size | Cohen's d = 0.78 menunjukkan *Medium-to-Large Effect*. Perbedaannya tidak hanya "ada", tapi juga berskala besar. |
+| Practical significance | Secara praktis, peningkatan 9.7 poin pada skala SUS akan langsung mengubah pengalaman dan impresi responden dari yang tadinya "Marginal/Kurang" menjadi "Baik/Nyaman". |
+| Hubungan ke RQ | Menjawab hipotesis utama penelitian bahwa perombakan desain sistem pada SIGNAL benar-benar membuahkan hasil positif yang signifikan dibanding sistem lama. |
+| Perbandingan literatur | Skor standar minimal SUS di dunia industri UX adalah 68. Sakpole (67) tergolong "Poor", sementara SIGNAL (76) tergolong "Good". |
 
 ---
 
@@ -156,18 +158,16 @@ Latih kemampuan failure analysis: hipotesis TIDAK didukung. Apa yang bisa dipela
 
 | Pertanyaan | Jawaban |
 |-----------|---------|
-| Apakah ini "gagal"? | *Contoh: Bukan gagal total — hipotesis tidak terdukung adalah temuan yang valid dan bisa menjadi kontribusi.* |
-| Kemungkinan penyebab? | *Contoh: Metode baru menambah kompleksitas komputasi (+40% waktu) tanpa peningkatan F1 yang cukup — overhead tidak sebanding.* |
-| Boundary condition? | *Contoh: Metode ini hanya efektif ketika data ≥ 10.000 record; di dataset kecil (<1.000), baseline lebih stabil.* |
-| Insight yang bisa diambil? | *Contoh: Ada trade-off ukuran data vs kompleksitas — rekomendasikan hybrid approach yang adaptif berdasarkan ukuran dataset.* |
-| Apakah layak dilaporkan? Mengapa? | *Contoh: Ya — negative result + boundary condition analysis adalah kontribusi riset yang diakui komunitas (ex: ACL, SIGIR). Mencegah riset duplikasi yang berulang.* |
+| Apakah ini "gagal"? | Bukan gagal. Mendapati bahwa hipotesis alternatif tidak terdukung (H0 tidak ditolak) adalah temuan empiris yang valid dan berguna bagi komunitas sains. |
+| Kemungkinan penyebab? | Pendekatan baru mungkin *over-engineered* sehingga menambah kompleksitas proses tanpa membawa manfaat berarti dibandingkan *baseline* yang sudah sederhana. |
+| Boundary condition? | Metode eksperimental ini mungkin hanya bekerja dan relevan pada ukuran dataset raksasa, sementara pada data kecil ia justru kurang stabil. |
+| Insight yang bisa diambil? | Terdapat *trade-off* di mana metode lama (*baseline*) terbukti jauh lebih efisien dan *robust* untuk menyelesaikan skenario standar sehari-hari. |
+| Apakah layak dilaporkan? Mengapa? | Ya. Mempublikasikan *negative result* beserta analisis batasannya sangat krusial untuk mencegah peneliti masa depan membuang waktu di jalan buntu yang sama. |
 
 **Limitation terkait:**
 | Jenis | Ancaman | Dampak |
 |-------|---------|--------|
-| *Contoh: Statistical* | *Contoh: Hanya 5 run per skenario* | *Power test rendah* |
-| | | |
-| | | |
+| Statistical limitation | Kurangnya ukuran sampel (*Sample size* kecil) | *Statistical power* menjadi terlalu rendah, sehingga gagal mendeteksi *effect size* yang kecil meskipun perbedaannya sebenarnya ada. |
 
 ---
 
@@ -175,5 +175,4 @@ Latih kemampuan failure analysis: hipotesis TIDAK didukung. Apa yang bisa dipela
 
 > Apakah "failure" dalam riset benar-benar gagal, atau justru kontribusi? Bagaimana failure analysis mengubah cara Anda melihat hasil negatif?
 
-> ___________________________________________________
-> ___________________________________________________
+> "Failure" (yakni kegagalan menolak hipotesis nol) bukanlah sebuah kegagalan ilmiah, melainkan kontribusi dalam bentuk penetapan *boundary condition* (kondisi batas operasional sebuah sistem/teori). Dengan mengadopsi pola pikir *failure analysis*, hasil riset yang "negatif" tidak lagi dianggap sebagai aib yang harus dimanipulasi (*p-hacking*), melainkan sebagai kesempatan berharga untuk menjelaskan "kapan", "bagaimana", dan "kenapa" sesuatu tidak bekerja sesuai ekspektasi. Ini mendorong transparansi dan kemajuan ilmu pengetahuan itu sendiri.

@@ -62,29 +62,30 @@ Keduanya **saling melengkapi**:
 
 ## Template A.12 — Result Presentation Plan
 
-```
-RESULT PRESENTATION PLAN
+**RESULT PRESENTATION PLAN**
 
-Research Question : ____________________
-Metrik Utama      : ____________________
+**Research Question :** Apakah terdapat perbedaan usability (SUS) antara aplikasi SIGNAL dan New Sakpole?
+**Metrik Utama      :** Skor SUS (System Usability Scale)
 
-Tabel Hasil:
-| Skenario | Metrik 1 (mean ± std) | Metrik 2 (mean ± std) | n |
-|----------|----------------------|----------------------|---|
-|          |                      |                      |   |
+**Tabel Hasil:**
 
-Visualisasi yang Direncanakan:
-| # | Jenis Grafik | Pesan Utama | Metrik |
-|---|-------------|-------------|--------|
-| 1 |             |             |        |
-| 2 |             |             |        |
+| Skenario    | Metrik 1 (SUS Score mean ± std) | Metrik 2 (-) | n  |
+|-------------|---------------------------------|--------------|----|
+| SIGNAL      | 76.90 ± 12.79                   | -            | 97 |
+| New Sakpole | 67.16 ± 12.03                   | -            | 97 |
 
-Bias Check:
-  [ ] Y-axis mulai dari 0 (atau dijustifikasi)
-  [ ] Error bar/CI ditampilkan
-  [ ] Semua data disertakan (tidak cherry-picked)
-  [ ] Tidak menggunakan 3D tanpa alasan
-```
+**Visualisasi yang Direncanakan:**
+
+| # | Jenis Grafik          | Pesan Utama                                           | Metrik         |
+|---|-----------------------|-------------------------------------------------------|----------------|
+| 1 | Bar Chart + Error Bar | Perbandingan rata-rata skor SUS SIGNAL vs New Sakpole | Mean SUS ± std |
+| 2 | Box Plot              | Distribusi skor SUS responden pada tiap aplikasi      | Semua run SUS  |
+
+**Bias Check:**
+- [x] Y-axis mulai dari 0 (atau dijustifikasi)
+- [x] Error bar/CI ditampilkan
+- [x] Semua data disertakan (tidak cherry-picked)
+- [x] Tidak menggunakan 3D tanpa alasan
 
 ---
 
@@ -92,17 +93,17 @@ Bias Check:
 
 Buat tabel hasil eksperimen Anda (boleh dengan data simulasi jika belum punya data riil).
 
-| Skenario | Metrik 1 (mean ± std) | Metrik 2 (mean ± std) | n |
-|----------|----------------------|----------------------|---|
-| *Contoh: BERT-base* | *88.4 ± 1.2%* | *45.2 ± 3.1 min* | *10* |
-| | | | |
-| | | | |
+| Skenario            | Metrik 1 (SUS Score mean ± std) | Metrik 2 (-)     | n  |
+|---------------------|---------------------------------|------------------|----|
+| *Contoh: BERT-base* | *88.4 ± 1.2%*                   | *45.2 ± 3.1 min* | *10* |
+| SIGNAL              | 76.90 ± 12.79                   | -                | 97 |
+| New Sakpole         | 67.16 ± 12.03                   | -                | 97 |
 
 **Checklist tabel:**
-- [ ] Self-contained (judul jelas, satuan ada, N tercantum)
-- [ ] Mean ± std (bukan single number)
-- [ ] Diurutkan berdasarkan metrik utama
-- [ ] Format konsisten di semua baris
+- [x] Self-contained (judul jelas, satuan ada, N tercantum)
+- [x] Mean ± std (bukan single number)
+- [x] Diurutkan berdasarkan metrik utama
+- [x] Format konsisten di semua baris
 
 ---
 
@@ -110,11 +111,11 @@ Buat tabel hasil eksperimen Anda (boleh dengan data simulasi jika belum punya da
 
 Rencanakan 2-3 grafik untuk menyajikan data dari Latihan 1. Setiap grafik = satu pesan.
 
-| # | Jenis Grafik | Pesan | Data yang Digunakan |
-|---|-------------|-------|---------------------|
-| 1 | *Contoh: Bar chart + error bar* | *Perbandingan accuracy antar 3 model* | *Mean accuracy ± std* |
-| 2 | *Box plot* | *Distribusi F1 per model* | *Semua run F1* |
-| 3 | *Scatter plot* | *Trade-off accuracy vs training time* | *Mean accuracy vs mean time* |
+| # | Jenis Grafik                  | Pesan                                                 | Data yang Digunakan       |
+|---|-------------------------------|-------------------------------------------------------|---------------------------|
+| 1 | *Contoh: Bar chart + error bar* | *Perbandingan accuracy antar 3 model*               | *Mean accuracy ± std*     |
+| 2 | Bar Chart + Error Bar         | Perbandingan rata-rata skor SUS SIGNAL vs New Sakpole | Mean SUS ± std            |
+| 3 | Box Plot                      | Distribusi skor SUS responden pada tiap aplikasi      | Semua skor SUS yang valid |
 
 ---
 
@@ -127,13 +128,13 @@ Evaluasi visualisasi berikut untuk bias (skenario dari contoh):
 | Pertanyaan | Jawaban |
 |-----------|---------|
 | Apakah Y-axis menyesatkan? | *Contoh: Ya — A terlihat 2× B padahal beda 0.4%* |
-| Apakah error bar ditampilkan? | |
-| Apakah semua kondisi ditampilkan? | |
-| Apa solusinya? | |
+| Apakah error bar ditampilkan? | Tidak, visualisasi tersebut menyembunyikan signifikansi statistik |
+| Apakah semua kondisi ditampilkan? | Ya, tapi distribusinya tidak terlihat |
+| Apa solusinya? | Mulai Y-axis dari 0, atau gunakan range yang masuk akal dengan menyertakan error bar (Standard Deviation/CI) agar terlihat apakah perbedaan 0.4% itu signifikan atau masuk dalam margin of error. |
 
 **Evaluasi grafik Anda sendiri dari Latihan 2:**
-- [ ] Semua bias check lulus
-- [ ] Ada yang perlu diperbaiki: ____
+- [x] Semua bias check lulus
+- [ ] Ada yang perlu diperbaiki: Tidak ada, saya merencanakan Y-axis dari 0 dan menggunakan error bar.
 
 ---
 
@@ -141,5 +142,6 @@ Evaluasi visualisasi berikut untuk bias (skenario dari contoh):
 
 > Mengapa tabel dan grafik keduanya diperlukan — tidak cukup salah satu saja? Pernahkah Anda membuat grafik yang (tanpa sengaja) menyesatkan?
 
-> ___________________________________________________
-> ___________________________________________________
+> Tabel diperlukan untuk memberikan nilai persis (presisi) agar data bisa disitasi atau direproduksi oleh orang lain. Sedangkan grafik diperlukan untuk menunjukkan pola visual atau tren yang sulit dilihat sekilas pada angka-angka tabel. Keduanya saling melengkapi.
+> 
+> Ya, saya pernah membuat grafik bar chart yang rentang Y-axis-nya saya potong (tidak dari 0) agar perbedaannya terlihat besar, padahal bedanya sangat kecil.
