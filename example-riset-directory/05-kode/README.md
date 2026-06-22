@@ -1,25 +1,13 @@
 # 05-kode
 
-Source code implementasi — **Tahap 2** (API Gateway) dan **Tahap 3** (skrip pengujian k6).
+Folder ini merupakan ruang penyimpanan utama untuk seluruh skrip (*script*) atau kode sumber (*source code*) pemrograman yang saya susun dan saya gunakan selama pelaksanaan riset komparatif *usability* ini.
 
-## Struktur yang direncanakan
+## Struktur dan Isi yang Diharapkan
 
-```
-05-kode/
-├── gateway/              # API Gateway (Go + Echo)
-│   ├── cmd/gateway/
-│   ├── internal/
-│   ├── migrations/       # migration SQL (signing_keys, rate_limit_counters)
-│   ├── scripts/          # skrip seed (generate RSA keypair, insert signing_keys)
-│   ├── docker-compose.yml
-│   └── .env.example
-└── k6/                   # skrip pengujian k6
-    ├── legitimate.js
-    ├── attack.js
-    └── mixed.js
-```
+- **Skrip Pembersihan Data (*Data Cleaning*):** Kode pemrograman (seperti bahasa Python atau R) yang berfungsi untuk membuang pencilan skor (*outlier* > 100), membersihkan data kosong (*missing value*), dan memastikan dataset final valid untuk diuji.
+- **Skrip Pengujian Statistik:** Kode otomatisasi untuk menghitung rumusan *Independent T-Test*, memperoleh *p-value*, serta menghitung besaran efek (*Cohen's d*) dari dataset yang telah dibersihkan.
+- **Skrip Visualisasi:** Kode tambahan (seperti Matplotlib/Seaborn) untuk membangun diagram grafik pendukung (misalnya *bar chart* yang dilengkapi *error bar*).
 
-## Acuan
+## Berkas Terkait
 
-- Rencana implementasi Gateway: [../09-docs/tahap-2-implementasi-gateway.md](../09-docs/tahap-2-implementasi-gateway.md)
-- Rencana skrip k6: [../09-docs/tahap-3-pengujian-k6.md](../09-docs/tahap-3-pengujian-k6.md)
+- `check_data.py` — Skrip utama berbasis Python (menggunakan kepustakaan Pandas dan SciPy) yang secara khusus saya buat untuk meninjau data mentah, mendeteksi anomali/outlier skor SUS responden, sekaligus mengeksekusi perhitungan T-Test secara komputasi otomatis.

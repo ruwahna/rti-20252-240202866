@@ -1,25 +1,21 @@
 # 07-manuskrip
 
-Draf naskah ilmiah — **Tahap 5**, target publikasi Sinta 2 (Jurnal RESTI/Telematika) atau Scopus Q3-Q4.
+Folder ini berfungsi sebagai tempat penyimpanan utama draf naskah ilmiah (jurnal/artikel riset) saya sebelum diserahkan (*submit*) ke pihak universitas atau penerbit jurnal publikasi sasaran.
 
-## Naskah konsolidasi
+## Naskah Konsolidasi Utama
 
-- [naskah-jurnal.md](naskah-jurnal.md) — naskah lengkap dalam template jurnal standar (Judul/Penulis, Abstrak ID+EN, §1 Pendahuluan – §5 Kesimpulan, Daftar Pustaka)
-- [naskah-jurnal.docx](naskah-jurnal.docx) — hasil konversi ke .docx (dibangun via `python build_docx.py`, lihat [build_docx.py](build_docx.py); tidak memerlukan pandoc)
+- [naskah-jurnal.md](naskah-jurnal.md) — Draf naskah ilmiah lengkap saya yang sudah dirangkai menggunakan standar penulisan akademis IMRAD (*Introduction, Method, Result, And Discussion*). 
 
-## Struktur naskah per bagian (sumber/draf kerja)
+## Struktur Naskah per Bagian (Draf Kerja)
 
-- [00-outline.md](00-outline.md) — outline, peta sumber, dan daftar klaim kunci yang harus konsisten
-- [01-abstrak.md](01-abstrak.md) — Abstrak (ID & EN)
-- [02-pendahuluan.md](02-pendahuluan.md) — Pendahuluan (latar belakang, rumusan masalah, tujuan, kontribusi)
-- [03-tinjauan-pustaka.md](03-tinjauan-pustaka.md) — Tinjauan Pustaka (JWT/JWKS, mitigasi, *related work*; lihat [../02-literatur/](../02-literatur/))
-- [04-metodologi.md](04-metodologi.md) — Metodologi (arsitektur eksperimen, skema hybrid caching, skenario k6)
-- [05-hasil-analisis.md](05-hasil-analisis.md) — Hasil & Analisis (mengacu pada [../06-output/](../06-output/))
-- [06-kesimpulan.md](06-kesimpulan.md) — Kesimpulan & Saran Penelitian Lanjutan
-- [07-daftar-pustaka.md](07-daftar-pustaka.md) — Daftar Pustaka (18 referensi, format IEEE; BibTeX di [../02-literatur/daftar-pustaka.bib](../02-literatur/daftar-pustaka.bib))
+Untuk memudahkan proses penulisan dan meminimalisasi kesalahan saat revisi, saya memecah draf naskah menjadi beberapa bagian yang spesifik:
+- `00-outline.md` — *Outline* gagasan utama dan kerangka argumentasi yang akan saya gunakan.
+- `01-abstrak.md` — Draf ringkasan riset secara keseluruhan (Abstrak) dalam bahasa Indonesia dan Inggris.
+- `02-pendahuluan.md` — Penjabaran latar belakang masalah mengenai urgensi komparasi *usability* pada platform e-Samsat di mata masyarakat.
+- `03-tinjauan-pustaka.md` — Kajian literatur pendukung yang merujuk dari catatan di folder `02-literatur/`.
+- `04-metodologi.md` — Penjabaran teknis mengenai penggunaan instrumen SUS dan metode statistika *Independent T-Test*.
+- `05-hasil-analisis.md` — Penjabaran interpretasi temuan berbasis metrik dan grafik yang diambil dari folder `06-output/`.
+- `06-kesimpulan.md` — Penarikan simpulan komparasi yang memvalidasi bahwa SIGNAL terbukti lebih layak guna dibanding Sakpole.
+- `07-daftar-pustaka.md` — Daftar rujukan sitasi yang telah saya gunakan.
 
-> `naskah-jurnal.md`/`.docx` adalah gabungan final dari bagian-bagian di atas. Pemindahan ke template jurnal tujuan (margin, sitasi, kolom spesifik) dilakukan oleh peneliti.
-
-## Acuan
-
-[../09-docs/tahap-5-draf-paper.md](../09-docs/tahap-5-draf-paper.md)
+*Catatan: Keseluruhan bagian draf di atas pada akhirnya akan saya gabungkan menjadi satu kesatuan dokumen utuh (seperti yang terlihat pada file naskah-jurnal.md) untuk disesuaikan dengan format template resmi dari dosen penguji atau redaksi jurnal.*

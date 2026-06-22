@@ -1,16 +1,12 @@
 # 01-proposal
 
-Dokumen proposal penelitian — versi draf maupun final.
+Folder ini dikhususkan untuk menyimpan dokumen proposal penelitian saya—baik yang masih berupa draf kasar maupun revisi final yang sudah disetujui.
 
-## Isi yang diharapkan
+## Isi yang Diharapkan
 
-- Proposal penelitian (latar belakang, rumusan masalah, tujuan, urgensi JWKS Endpoint Flooding)
-- Revisi proposal berdasarkan masukan pembimbing/reviewer
+- **Proposal Penelitian:** Berisi latar belakang masalah, rumusan masalah, tujuan penelitian, dan urgensi dari riset komparasi *usability* antara aplikasi SIGNAL dan New Sakpole.
+- **Revisi Proposal:** Catatan perbaikan atau revisi dokumen proposal berdasarkan masukan dari dosen pembimbing atau *reviewer*.
 
 ## Berkas
 
-- [proposal-penelitian.md](proposal-penelitian.md) — draf proposal (rekonstruksi retrospektif berdasarkan hasil Tahap 1-4)
-
-## Acuan
-
-Ringkasan topik & roadmap penelitian: [../09-docs/rencana-penelitian.md](../09-docs/rencana-penelitian.md)
+- [proposal-penelitian.md](proposal-penelitian.md) — Draf proposal penelitian saya yang sudah disusun berdasarkan latar belakang masalah.

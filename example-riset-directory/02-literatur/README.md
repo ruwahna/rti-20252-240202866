@@ -1,21 +1,20 @@
 # 02-literatur
 
-Kumpulan referensi & paper terkait untuk mendukung Tinjauan Pustaka (Tahap 5).
+Folder ini menjadi tempat sentral bagi saya untuk mengumpulkan seluruh referensi dan jurnal (paper) terkait yang mendukung perumusan Tinjauan Pustaka (*Literature Review*) pada riset ini.
 
-## Topik referensi yang relevan
+## Topik Referensi yang Relevan
 
-- Keamanan JWT/JWKS (termasuk kelas kerentanan JWKS Endpoint Flooding / CVE-2026-48524)
-- Strategi caching multi-layer (Redis sebagai L1, PostgreSQL sebagai L2/source of truth)
-- Negative caching untuk mitigasi flooding/cache-busting
-- Rate limiting pada API Gateway / microservices
-- Metodologi load testing dengan k6
+- Evaluasi pengalaman pengguna (*User Experience* / UX) pada aplikasi layanan publik (*e-Government*).
+- Standardisasi dan penggunaan *System Usability Scale* (SUS) sebagai instrumen pengukur *usability*.
+- Analisis statistik menggunakan pengujian *Independent T-Test* dalam riset kuantitatif UX.
+- Studi kasus atau ulasan mengenai aplikasi SIGNAL dan Sakpole di tingkat nasional maupun daerah.
 
-## Isi yang diharapkan
+## Isi yang Diharapkan
 
-- Salinan/ringkasan paper (PDF, catatan ringkasan, anotasi)
-- Daftar pustaka terkumpul (format BibTeX/RIS) untuk diacu di [../07-manuskrip/](../07-manuskrip/)
+- **Salinan Jurnal (PDF):** *File* jurnal atau artikel referensi yang akan saya baca dan rujuk.
+- **Catatan & Ringkasan:** Anotasi atau rangkuman pribadi saya mengenai poin penting dari setiap jurnal pendukung.
+- **Daftar Pustaka:** Kumpulan kutipan berformat BibTeX atau matriks pemetaan jurnal yang akan digunakan pada naskah laporan akhir.
 
-## Berkas
+## Berkas Terkait
 
-- [matriks-literatur.md](matriks-literatur.md) — matriks literatur lengkap (7 topik dipetakan ke 18 referensi terverifikasi; status verifikasi CVE-2026-48524)
-- [daftar-pustaka.bib](daftar-pustaka.bib) — bibliografi BibTeX (18 entri), siap diimpor ke Mendeley
+- [matriks-literatur.md](matriks-literatur.md) — Draf catatan matriks pemetaan studi literatur terkait riset pengujian SUS pada aplikasi e-Samsat.

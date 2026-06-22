@@ -1,13 +1,12 @@
 # 00-admin
 
-Berkas administratif penelitian: jadwal bimbingan, korespondensi dengan pembimbing/editor jurnal, surat-menyurat, dan catatan administratif lainnya yang tidak masuk ke kategori ilmiah/teknis.
+Folder ini dikhususkan untuk menyimpan berkas-berkas administratif dari penelitian saya. Seluruh dokumen yang tidak terkait langsung dengan proses pemrograman atau analisis data statistik saya kumpulkan di sini agar lebih tertata dan mudah dicari.
 
-## Isi yang diharapkan
+## Isi yang Diharapkan
 
-- Jadwal bimbingan & catatan rapat
-- Korespondensi (email, surat pengantar, dsb.)
-- Dokumen administratif lain (timeline, checklist submission jurnal)
+- **Jadwal & Logbook:** Catatan harian mengenai progres pengerjaan riset saya, mulai dari WS-11 hingga WS-16, untuk memantau timeline pelaksanaannya.
+- **Catatan Bimbingan:** Kumpulan umpan balik (*feedback*), revisi, atau masukan dari dosen/asisten agar saya tidak lupa saat melakukan perbaikan naskah.
+- **To-Do List (Checklist):** Daftar pekerjaan yang harus diselesaikan sebelum laporan akhir (UAS) dikumpulkan, seperti pengecekan kesalahan ketik (*typo*) dan validasi grafik visual.
+- **Korespondensi:** Bukti percakapan, *email*, atau surat penting selama proses penyusunan laporan.
 
-## Berkas
-
-- [jadwal-dan-log-penelitian.md](jadwal-dan-log-penelitian.md) — log kronologis pelaksanaan Tahap 1-5 dan checklist tindak lanjut sebelum submission
+Secara singkat, folder `00-admin` ini menjadi wadah bagi saya untuk melakukan **manajemen waktu dan progres**, sehingga riset komparatif usability *SIGNAL vs Sakpole* dapat selesai tepat pada waktunya dengan hasil yang maksimal.

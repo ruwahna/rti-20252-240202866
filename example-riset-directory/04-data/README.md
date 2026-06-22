@@ -1,13 +1,17 @@
 # 04-data
 
-Data mentah hasil pengujian — output dari **Tahap 3**, input untuk **Tahap 4**.
+Folder ini adalah tempat khusus di mana saya menyimpan seluruh kumpulan data mentah (*raw data*) yang diperoleh langsung dari proses pengumpulan data di lapangan, sebelum data tersebut dimanipulasi atau dianalisis.
 
-## Isi yang diharapkan
+## Isi yang Diharapkan
 
-- Hasil pengujian k6 dalam format CSV/JSON, per kombinasi mode (`CACHE_MODE=none|hybrid`) × jenis traffic (legitimate/attack/mixed)
-- Metrik resource container (CPU, memori) PostgreSQL & Redis selama pengujian
-- Metadata eksekusi tiap run (timestamp, konfigurasi, durasi)
+- **Data Mentah (*Raw Data*):** File hasil *export* kuesioner dari *platform survey* (seperti Google Form) dalam format CSV atau Excel.
+- **Data Hasil Pembersihan (*Cleaned Data*):** Salinan data yang telah dibersihkan dari nilai pencilan (*outlier* ekstrem), data ganda (*duplikat*), dan data kosong (*missing values*), sehingga siap untuk diuji secara statistik.
+- **Kamus Data (*Data Dictionary*):** Penjelasan singkat mengenai deskripsi setiap kolom (misalnya penjelasan apa arti dari kolom `SUS_Score`).
 
-## Catatan
+## Catatan Penting
 
-Data di folder ini bersifat mentah (raw) dan belum diolah. Hasil olahan (statistik, grafik) disimpan di [../06-output/](../06-output/).
+Data di dalam folder ini harus selalu dijaga orisinalitasnya. Segala bentuk *output* berupa grafik visualisasi (*bar chart*) atau nilai hasil uji statistik (*p-value* T-Test) tidak boleh diletakkan di sini, melainkan akan saya simpan di folder *output* khusus agar tidak tercampur secara historis dengan sumber *dataset*.
+
+## Berkas Terkait
+
+- `survey_data_signal_sakpole.csv` — Kumpulan data mentah asli yang memuat data dari 200 responden awal terkait pengujian aplikasi SIGNAL dan Sakpole.

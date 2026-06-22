@@ -1,18 +1,14 @@
 # 03-teori
 
-Arsitektur, desain, dan landasan teori sistem — hasil **Tahap 1**.
+Folder ini berfungsi sebagai repositori konsep, definisi, dan landasan teori metodologis yang saya gunakan sebagai basis pengukuran dalam penelitian ini.
 
-## Isi yang diharapkan
+## Isi yang Diharapkan
 
-- Diagram alur resolusi kunci (mitigasi JWKS flooding)
-- Skema database PostgreSQL (`signing_keys`, `rate_limit_counters`)
-- Skema Redis (positive/negative cache)
-- Diagram arsitektur komponen (Gateway, Redis, PostgreSQL)
+- Penjelasan lengkap mengenai kerangka kerja (*framework*) *System Usability Scale* (SUS).
+- Penjabaran rumusan matematis dan pengelompokan standar nilai (*grade*) pada perhitungan skor SUS.
+- Landasan teori mengenai pengujian hipotesis statistika menggunakan metode *Independent T-Test*.
+- Konsep dasar mengenai *User Interface* (UI) dan *User Experience* (UX) pada lingkup aplikasi layanan publik.
 
-## Berkas
+## Berkas Terkait
 
-- [arsitektur-dan-skema.md](arsitektur-dan-skema.md) — diagram Mermaid (arsitektur komponen, alur resolusi kunci, fail-closed/fail-open, ERD database), skema Redis, dan pemetaan ke implementasi kode
-
-## Acuan
-
-Detail teknis lengkap Tahap 1 (status: selesai): [../09-docs/tahap-1-arsitektur-dan-skema-database.md](../09-docs/tahap-1-arsitektur-dan-skema-database.md)
+- [landasan-teori.md](landasan-teori.md) — Dokumen penjelasan instrumen SUS dan penjabaran metode uji hipotesis yang saya terapkan pada riset komparatif SIGNAL dan Sakpole ini.
