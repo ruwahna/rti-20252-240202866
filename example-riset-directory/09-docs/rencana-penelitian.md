@@ -1,27 +1,27 @@
-# Rencana Penelitian: Mitigasi JWKS Endpoint Flooding dengan Redis-PostgreSQL Hybrid Caching
+# Rencana Penelitian: Komparasi Usability SIGNAL vs New Sakpole
 
 ## 1. Ringkasan
 
 | Item | Keterangan |
 |---|---|
-| Judul | Performance and Security Evaluation of Mitigating JWKS Endpoint Flooding on Microservices Gateway Using Redis-PostgreSQL Hybrid Caching |
-| Target Publikasi | Sinta 2 (Jurnal RESTI/Telematika) atau Scopus Q3-Q4 |
-| Stack | Docker, PostgreSQL, Redis, API Gateway (Go), k6 |
-| Masalah | JWKS Endpoint Flooding via `kid` acak → kueri tak terbatas ke Identity Service/DB → resource exhaustion |
-| Solusi | Hybrid cache (Redis L1 + PostgreSQL L2) + negative caching + rate-limiting pada lookup kunci |
+| Judul | Analisis Komparatif Usability dan User Experience pada Layanan Pajak Kendaraan Digital: SIGNAL vs New Sakpole |
+| Target Publikasi | Sinta 5 (Technology and Informatics Insight Journal - TIIJ) |
+| Stack | Python (pandas, matplotlib, numpy), System Usability Scale (SUS), User Experience Questionnaire (UEQ) |
+| Masalah | Adanya perbedaan persepsi usability yang jomplang antara SIGNAL (nasional) dan Sakpole (regional) di masyarakat. |
+| Solusi | Evaluasi empiris menggunakan SUS & UEQ pada 194 responden valid dengan pengujian Independent T-Test. |
 
 ## 2. Alur Kerja (Roadmap)
 
 Setiap tahap memiliki file rencana detail tersendiri agar lebih rapi:
 
-- [x] **Tahap 1** — [Perancangan Arsitektur & Skema Database](tahap-1-arsitektur-dan-skema-database.md) — *Selesai*
-- [x] **Tahap 2** — [Implementasi API Gateway (Go)](tahap-2-implementasi-gateway.md) — *Selesai*
-- [x] **Tahap 3** — [Skrip Pengujian k6 (Legitimate vs Attack Traffic)](tahap-3-pengujian-k6.md) — *Selesai*
-- [x] **Tahap 4** — [Ekstraksi Data & Visualisasi](tahap-4-analisis-data.md) — *Selesai*
-- [ ] **Tahap 5** — [Draf Paper Jurnal](tahap-5-draf-paper.md) — *Berikutnya*
+- [x] **Tahap 1** — [Validasi Data & Preprocessing](tahap-1-validasi-data-dan-cleaning.md) — *Selesai*
+- [x] **Tahap 2** — [Uji Deskriptif & Visualisasi](tahap-2-visualisasi-dan-deskriptif.md) — *Selesai*
+- [x] **Tahap 3** — [Uji Statistik Inferensial (T-Test)](tahap-3-uji-statistik-t-test.md) — *Selesai*
+- [x] **Tahap 4** — [Penulisan Draf Manuskrip](tahap-4-penulisan-draf-naskah.md) — *Selesai*
+- [x] **Tahap 5** — [Persiapan Slide Presentasi (UAS)](tahap-5-persiapan-slide-presentasi.md) — *Selesai*
 
 ---
 
 ## 3. Catatan
 
-Dokumen ini adalah indeks utama. Detail teknis, skema, dan keputusan masing-masing tahap dicatat pada file `tahap-N-*.md` terkait dan diperbarui seiring progres pengerjaan.
+Dokumen ini adalah indeks utama. Detail teknis, skema, dan keputusan masing-masing tahap dicatat pada file `tahap-1-*.md` hingga `tahap-5-*.md` terkait dan diperbarui seiring progres pengerjaan.

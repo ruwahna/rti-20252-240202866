@@ -1,19 +1,14 @@
 # 09-docs
 
-Dokumen perencanaan & panduan kerja penelitian.
+Dokumen perencanaan & panduan kerja penelitian komparasi usability SIGNAL vs Sakpole.
 
 ## Isi
 
 - [rencana-penelitian.md](rencana-penelitian.md) — **indeks utama**, ringkasan topik & roadmap 5 tahap
-- [tahap-1-arsitektur-dan-skema-database.md](tahap-1-arsitektur-dan-skema-database.md) — arsitektur & skema DB (selesai)
-- [tahap-2-implementasi-gateway.md](tahap-2-implementasi-gateway.md) — rencana implementasi Gateway (Go)
-- [tahap-3-pengujian-k6.md](tahap-3-pengujian-k6.md) — rencana skrip pengujian k6
-- [tahap-4-analisis-data.md](tahap-4-analisis-data.md) — rencana ekstraksi data & visualisasi
-- [tahap-5-draf-paper.md](tahap-5-draf-paper.md) — rencana struktur draf paper
-- [archive/promt.md](archive/promt.md) — *(arsip)* prompt awal asisten riset, sudah dikonsolidasikan ke [.ai/research-context.md](../.ai/research-context.md)
+- [tahap-1-validasi-data-dan-cleaning.md](tahap-1-validasi-data-dan-cleaning.md) — validasi data & preprocessing (selesai)
+- [tahap-2-visualisasi-dan-deskriptif.md](tahap-2-visualisasi-dan-deskriptif.md) — visualisasi & perhitungan deskriptif (selesai)
+- [tahap-3-uji-statistik-t-test.md](tahap-3-uji-statistik-t-test.md) — rencana uji beda Independent T-Test (selesai)
+- [tahap-4-penulisan-draf-naskah.md](tahap-4-penulisan-draf-naskah.md) — rencana penyusunan manuskrip jurnal (selesai)
+- [tahap-5-persiapan-slide-presentasi.md](tahap-5-persiapan-slide-presentasi.md) — rencana draf slide presentasi UAS (selesai)
 
 Deliverable konkret tiap tahap (kode, data, hasil, naskah) disimpan di folder bernomor terkait (lihat [README utama](../README.md)).
-
-## Knowledge & Instruksi AI
-
-Peran/persona AI, ringkasan penelitian, status roadmap, dan konvensi folder kini dikonsolidasikan di [.ai/](../.ai/) (dimuat otomatis oleh Claude Code via [CLAUDE.md](../CLAUDE.md) di root).
